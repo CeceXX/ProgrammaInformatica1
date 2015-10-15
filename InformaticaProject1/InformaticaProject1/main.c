@@ -25,18 +25,29 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
 }
 
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
-    puts("-------------------"); // puts() e' simile a printf(), ma va a capo in automatico
+    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico
     puts("  n  |  valore  "); // crea una tabellina carina per inserire i nostri numeri
     for (int i = 0; i < lunghezza; i++) {
         printf("  %d  |    %d    \n", i+1, array[i]);
     }
-    puts("-------------------\n");
+    puts("-----------------");
 }
 
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         array[i] = 0;
     }
+}
+
+void inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
+    for (int i = 0; i < lunghezza; i++) {
+        if (array[i] == 0) {
+            printf("Ho trovato 0! Inserisci l'elemento per la positione %d: ", i+1);
+            scanf("%d", &array[i]);
+            break;
+        }
+    }
+    puts("Non ho trovato alcun elemento contenente 0.");
 }
 
 int main() {
@@ -46,9 +57,13 @@ int main() {
     scanf("%d", &maxNumero);
     
     while (1) {
-        puts("1. Azzeramento del vettore");
-        puts("2. Inserimento di tutti gli elementi da tastiera");
-        puts("5. Visualizzazione di tutti gli elementi presenti nel vettore");
+        puts("--------------------------------------------------------------------------");
+        puts("|  1  |  Azzeramento del vettore                                         |");
+        puts("|  2  |  Inserimento di tutti gli elementi da tastiera                   |");
+        puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero |");
+        puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore      |");
+        puts("--------------------------------------------------------------------------");
+
         printf("Scegli un'opzione del menu: ");
         scanf("%d", &inserimento);
         
@@ -58,6 +73,9 @@ int main() {
                 break;
             case 2:
                 inserimentoElementiVettore(myArray, maxNumero);
+                break;
+            case 3:
+                inserimentoSoloUnDatoSeZero(myArray, maxNumero);
                 break;
             case 5:
                 visualizzazioneElementiVettore(myArray, maxNumero);
