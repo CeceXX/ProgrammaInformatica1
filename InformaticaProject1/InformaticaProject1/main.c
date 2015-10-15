@@ -25,7 +25,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
 }
 
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
-    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico
+    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, senza '\n'
     puts("  n  |  valore  "); // crea una tabellina carina per inserire i nostri numeri
     for (int i = 0; i < lunghezza; i++) {
         printf("  %d  |    %d    \n", i+1, array[i]);
@@ -53,7 +53,7 @@ void inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
 int main() {
     int myArray[150], maxNumero, inserimento;
     
-    printf("Inserisci quanti numeri desideri inserire: ");
+    printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
     scanf("%d", &maxNumero);
     
     while (1) {
