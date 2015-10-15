@@ -18,9 +18,12 @@
 #include <stdio.h>
 
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
+    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico
+    puts("|  n  |  valore |"); // crea una tabellina carina per inserire i nostri numeri
     for (int i = 0; i < lunghezza; i++) {
-        printf("%do numero: %d\n", i+1, array[i]);
+        printf("|  %d  |    %d    |\n", i+1, array[i]);
     }
+    puts("-----------------\n");
 }
 
 void azzeramentoVettore(int array[], int lunghezza) {
@@ -49,6 +52,7 @@ int main() {
                 visualizzazioneElementiVettore(myArray, maxNumero);
                 break;
             default:
+                puts("Non ho riconosciuto l'opzione. Riprova!");
                 break;
         }
     }
