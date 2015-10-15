@@ -17,16 +17,23 @@
 
 #include <stdio.h>
 
-void visualizzazioneElementiVettore(int array[], int lunghezza) {
-    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico
-    puts("|  n  |  valore |"); // crea una tabellina carina per inserire i nostri numeri
+void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        printf("|  %d  |    %d    |\n", i+1, array[i]);
+        printf("Inserisci l'elemento per la positione %d: ", i+1);
+        scanf("%d", &array[i]);
     }
-    puts("-----------------\n");
 }
 
-void azzeramentoVettore(int array[], int lunghezza) {
+void visualizzazioneElementiVettore(int array[], int lunghezza) {
+    puts("-------------------"); // puts() e' simile a printf(), ma va a capo in automatico
+    puts("  n  |  valore  "); // crea una tabellina carina per inserire i nostri numeri
+    for (int i = 0; i < lunghezza; i++) {
+        printf("  %d  |    %d    \n", i+1, array[i]);
+    }
+    puts("-------------------\n");
+}
+
+void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         array[i] = 0;
     }
@@ -39,14 +46,18 @@ int main() {
     scanf("%d", &maxNumero);
     
     while (1) {
-        printf("1. Azzeramento del vettore\n");
-        printf("5. Visualizzazione di tutti gli elementi presenti nel vettore: \n");
+        puts("1. Azzeramento del vettore");
+        puts("2. Inserimento di tutti gli elementi da tastiera");
+        puts("5. Visualizzazione di tutti gli elementi presenti nel vettore");
         printf("Scegli un'opzione del menu: ");
         scanf("%d", &inserimento);
         
         switch (inserimento) {
             case 1:
-                azzeramentoVettore(myArray, maxNumero);
+                azzeramentoElementiVettore(myArray, maxNumero);
+                break;
+            case 2:
+                inserimentoElementiVettore(myArray, maxNumero);
                 break;
             case 5:
                 visualizzazioneElementiVettore(myArray, maxNumero);
