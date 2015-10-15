@@ -13,9 +13,15 @@
  9. ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
  10. ordinamento attraverso l'algoritmo del merge sort
  L'array verrà dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verrà richiesto di inserire il numero di elementi su cui operare
-*/
+ */
 
 #include <stdio.h>
+
+void visualizzazioneElementiVettore(int array[], int lunghezza) {
+    for (int i = 0; i < lunghezza; i++) {
+        printf("%do numero: %d\n", i+1, array[i]);
+    }
+}
 
 void azzeramentoVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
@@ -29,16 +35,22 @@ int main() {
     printf("Inserisci quanti numeri desideri inserire: ");
     scanf("%d", &maxNumero);
     
-    printf("1. Azzeramento del vettore\n");
-    printf("Scegli un'opzione del menu: ");
-    scanf("%d", &inserimento);
-    
-    switch (inserimento) {
-        case 1:
-            azzeramentoVettore(myArray, maxNumero);
-            break;
-        default:
-            break;
+    while (1) {
+        printf("1. Azzeramento del vettore\n");
+        printf("5. Visualizzazione di tutti gli elementi presenti nel vettore: \n");
+        printf("Scegli un'opzione del menu: ");
+        scanf("%d", &inserimento);
+        
+        switch (inserimento) {
+            case 1:
+                azzeramentoVettore(myArray, maxNumero);
+                break;
+            case 5:
+                visualizzazioneElementiVettore(myArray, maxNumero);
+                break;
+            default:
+                break;
+        }
     }
     
     return 0;
