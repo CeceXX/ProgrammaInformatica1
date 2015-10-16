@@ -15,7 +15,7 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h> // serve per random()
+#include <stdlib.h> // serve per la funzione che genera numeri random, RAND_MAX
 
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
@@ -64,11 +64,23 @@ void inserimentoNumeriCasuali(int array[], int lunghezza) {
     puts("");
 }
 
-void prodottoElementiIndiceZero(int array[], int lunghezza) [
-	for (int i = 0; i < lunghezza; i++) {
-		//if (i % i == 0 && i != i) return false;
+int controllaSeNumeroPrimo(int numero) {
+    for (int i = 2; i < numero; i++) {
+        if (numero % i == 0 && i != numero) {
+            return 0;
+        }
+    }
+    return 1;
+}
 
-	}
+void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
+    int prodotto = 1;
+    for (int i = 0; i < lunghezza; i++) {
+        if (controllaSeNumeroPrimo(i)) {
+            prodotto *= array[i];
+        }
+    }
+    printf("Il prodotto degli elementi del vettore e' %d.\n", prodotto);
 }
 
 int main() {
@@ -91,6 +103,7 @@ int main() {
         puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
         puts("|  4  |  Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento   |");
         puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore                                   |");
+        puts("|  7  |  Il prodotto dei numeri di indice primo                                                       |");
         puts("-------------------------------------------------------------------------------------------------------");
 
         printf("Scegli un'opzione del menu: ");
@@ -111,6 +124,9 @@ int main() {
                 break;
             case 5:
                 visualizzazioneElementiVettore(myArray, maxNumero);
+                break;
+            case 7:
+                prodottoNumeriIndicePrimo(myArray, maxNumero);
                 break;
             default:
                 printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento);
