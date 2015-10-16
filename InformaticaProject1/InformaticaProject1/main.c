@@ -4,8 +4,7 @@
  1. azzeramento del vettore
  2. inserimento di tutti i dati da tastiera
  3. inserimento di un solo dato nella prima posizione contente zero
- 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e
- trecento
+ 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
  5. la visualizzazione di tutti i dati presenti nel vettore
  6. l'inserimento dei numeri della serie geometrica
  7. il prodotto dei numeri di indice primo
@@ -16,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h> // serve per random()
 
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
@@ -26,7 +26,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
 
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, senza '\n'
-    puts("  n  |  valore  "); // crea una tabellina carina per inserire i nostri numeri
+    puts("  n  |  valore  ");
     for (int i = 0; i < lunghezza; i++) {
         printf("  %d  |    %d    \n", i+1, array[i]);
     }
@@ -39,15 +39,29 @@ void azzeramentoElementiVettore(int array[], int lunghezza) {
     }
 }
 
-void inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
+int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
             printf("Ho trovato 0! Inserisci l'elemento per la positione %d: ", i+1);
             scanf("%d", &array[i]);
-            break;
+            return 0;
         }
     }
     puts("Non ho trovato alcun elemento contenente 0.");
+    return 1;
+}
+
+int numeroRandom(int min, int max) {
+    int differenza = max - min;
+    return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min);
+}
+
+void inserimentoNumeriCasuali(int array[], int lunghezza) {
+    for (int i = 0; i < lunghezza; i++) {
+        int r = numeroRandom(200, 300);
+        array[i] = r;
+    }
+    puts("");
 }
 
 void prodottoElementiIndiceZero(int array[], int lunghezza) [
@@ -71,12 +85,13 @@ int main() {
 	}
 	
     while (1) {
-        puts("--------------------------------------------------------------------------");
-        puts("|  1  |  Azzeramento del vettore                                         |");
-        puts("|  2  |  Inserimento di tutti gli elementi da tastiera                   |");
-        puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero |");
-        puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore      |");
-        puts("--------------------------------------------------------------------------");
+        puts("-------------------------------------------------------------------------------------------------------");
+        puts("|  1  |  Azzeramento del vettore                                                                      |");
+        puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
+        puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
+        puts("|  4  |  Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento   |");
+        puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore                                   |");
+        puts("-------------------------------------------------------------------------------------------------------");
 
         printf("Scegli un'opzione del menu: ");
         scanf("%d", &inserimento);
@@ -91,11 +106,14 @@ int main() {
             case 3:
                 inserimentoSoloUnDatoSeZero(myArray, maxNumero);
                 break;
+            case 4:
+                inserimentoNumeriCasuali(myArray, maxNumero);
+                break;
             case 5:
                 visualizzazioneElementiVettore(myArray, maxNumero);
                 break;
             default:
-                puts("Non ho riconosciuto l'opzione. Riprova!");
+                printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento);
                 break;
         }
     }
