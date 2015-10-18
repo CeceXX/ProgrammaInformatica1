@@ -26,9 +26,9 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
 
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
-    puts("  n  |  valore  ");
+    puts("   n  |   valore  ");
     for (int i = 0; i < lunghezza; i++) {
-        printf("  %d  |    %d    \n", i+1, array[i]);
+        printf("  %2d  |    %3d    \n", i+1, array[i]);
     }
     puts("-----------------");
 }
