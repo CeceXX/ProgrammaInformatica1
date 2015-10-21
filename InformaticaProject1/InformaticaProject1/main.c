@@ -140,14 +140,22 @@ void mergeSort(int *A, int n) {
 }
 
 void serieGeometrica(int array[], int lunghezza) {
-    int r, somma = 0;
+    int r, p, somma;
     // https://www.youtube.com/watch?v=mcnblnEsf98
+    printf("Inserisci il primo numero della serie geometrica: ");
+    scanf("%d", &p);
     printf("Inserisci r: ");
     scanf("%d", &r);
-    // la somma geometrica è uguale a a(r^n)
+    // la somma geometrica è uguale a a(r^n)/r-1
+    // a è il primo numero della serie
+    // n è il numero di elementi della serie
+    // r è la costante della serie
     // inserisci tutti gli elementi della somma geometrica
-    somma = array[0]*(r^lunghezza-1)/(r-1);
+    for (int i = 0; i < lunghezza; i++) {
+        array[i] = p*pow(r, i);
+    }
     
+    somma = (p*(pow(r, lunghezza)-1))/(r-1);
     printf("La somma della serie geometrica equivale a %d.\n", somma);
 }
 
