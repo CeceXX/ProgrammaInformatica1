@@ -15,12 +15,12 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h> // serve per la funzione che genera numeri random, RAND_MAX
+#include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        printf("Inserisci l'elemento per la positione %d: ", i+1);
-        scanf("%d", &array[i]);
+        printf("Inserisci l'elemento per la positione %d: ", i + 1);
+        scanf("%d", &array[i]); // acquisisci un numero da tastiera da inserire nel vettore
     }
 }
 
@@ -28,14 +28,14 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
     puts("   n  |   valore  ");
     for (int i = 0; i < lunghezza; i++) {
-        printf("  %2d  |    %3d    \n", i+1, array[i]);
+        printf("  %2d  |    %3d    \n", i + 1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
     }
     puts("-----------------");
 }
 
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        array[i] = 0;
+        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno
     }
 }
 
@@ -44,22 +44,22 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
         if (array[i] == 0) {
             printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i+1);
             scanf("%d", &array[i]);
-            return 0;
+            return 0; // appena trova 0, si esce dalla funzione con 'return' perchè non la funzione non ci serve più
         }
     }
     puts("Non ho trovato alcun elemento contenente 0.");
-    return 1;
+    return 1; // restituisci il valore 1 con 'return', ovvero la funzione non ha trovato alcun elemento uguale a zero
 }
 
 int numeroRandom(int min, int max) {
-    int differenza = max - min;
-    return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min);
+    int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
+    return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
 }
 
 void inserimentoNumeriCasuali(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        int r = numeroRandom(200, 300);
-        array[i] = r;
+        int r = numeroRandom(200, 300); // passa alla funzione 'numeroRandom' il numero 'min' e quello 'max' su cui operare
+        array[i] = r; // poi assegna a ciasuno elemento il valore casuale generato
     }
     puts("");
 }
@@ -86,15 +86,21 @@ void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
 void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
     int somma = 0;
     for (int i = 0; i < lunghezza; i++) {
-        if (!(array[i] % 2)) { // pari: l'asterisco significa "l'opposto di".
+        
+        // - if (condizione) {...}
+        // il codice all'interno dell'if viene eseguito se la condizione è VERA
+        // altrimenti, se la condizione è FALSA, non viene eseguito
+        // if (1) {...} viene eseguito perchè se all'interno della condizione c'è un numero DIVERSO DA ZERO, allora la condizione è VERA
+        // if (0) {...} viene eseguito perchè se all'interno della condizione c'è ZERO, allora la condizione è FALSA
+        if (!(array[i] % 2)) { // il punto esclamatico significa "opposto di", se if (condizione) {...} è FALSO, allora if (!(condizione)) è FALSO per il punto esclamativo
             somma += array[i] % 3;
         }
     }
     printf("La somma e' %d.\n", somma);
 }
 
-void Merge(int *A,int *L,int leftCount,int *R,int rightCount) {
-    int i,j,k;
+void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
+    int i, j, k;
     
     // i - to mark the index of left aubarray (L)
     // j - to mark the index of right sub-raay (R)
@@ -110,16 +116,16 @@ void Merge(int *A,int *L,int leftCount,int *R,int rightCount) {
 }
 
 // Recursive function to sort an array of integers.
-void mergeSort(int *A,int n) {
-    int mid,i, *L, *R;
-    if(n < 2) return; // base condition. If the array has less than two element, do nothing.
+void mergeSort(int *A, int n) {
+    int mid, i, *L, *R;
+    if (n < 2) return; // base condition. If the array has less than two element, do nothing.
     
-    mid = n/2;  // find the mid index.
+    mid = n / 2;  // find the mid index.
     
     // create left and right subarrays
     // mid elements (from index 0 till mid-1) should be part of left sub-array
     // and (n-mid) elements (from mid to n-1) will be part of right sub-array
-    L = (int*)malloc(mid*sizeof(int));
+    L = (int*)malloc(mid*sizeof(int)); // crea uno spazio in memoria con malloc()
     R = (int*)malloc((n- mid)*sizeof(int));
     
     for(i = 0;i<mid;i++) L[i] = A[i]; // creating left subarray
@@ -127,8 +133,8 @@ void mergeSort(int *A,int n) {
     
     mergeSort(L,mid);  // sorting the left subarray
     mergeSort(R,n-mid);  // sorting the right subarray
-    Merge(A,L,mid,R,n-mid);  // Merging L and R into A as sorted list.
-    free(L);
+    Merge(A, L, mid, R, n-mid);  // Unisce i vettori L e R into A as sorted list.
+    free(L); // dopo aver creato uno spazio in memoria, ora liberalo con free() - questa funzione libera lo spazio di memoria HEAP
     free(R);
 }
 
@@ -186,7 +192,7 @@ int main() {
                 mergeSort(myArray, maxNumero);
                 break;
             default:
-                printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento);
+                printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento); // se l'inserimento non è compreso tra 1 e 10, allora non è valido
                 break;
         }
     }
