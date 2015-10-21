@@ -16,6 +16,7 @@
 
 #include <stdio.h>
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
+#include <math.h> // serve per calcolare la serie geometrica
 
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
@@ -35,15 +36,15 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
 
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno
+        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno, nel ciclo for
     }
 }
 
 int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
-            printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i+1);
-            scanf("%d", &array[i]);
+            printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i + 1);
+            scanf("%d", &array[i]); // acquisici un numero da tastiera
             return 0; // appena trova 0, si esce dalla funzione con 'return' perchè non la funzione non ci serve più
         }
     }
@@ -138,6 +139,18 @@ void mergeSort(int *A, int n) {
     free(R);
 }
 
+void serieGeometrica(int array[], int lunghezza) {
+    int r, somma = 0;
+    // https://www.youtube.com/watch?v=mcnblnEsf98
+    printf("Inserisci r: ");
+    scanf("%d", &r);
+    // la somma geometrica è uguale a a(r^n)
+    // inserisci tutti gli elementi della somma geometrica
+    somma = array[0]*(r^lunghezza-1)/(r-1);
+    
+    printf("La somma della serie geometrica equivale a %d.\n", somma);
+}
+
 int main() {
     int myArray[150], maxNumero, inserimento;
     
@@ -158,6 +171,7 @@ int main() {
         puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
         puts("|  4  |  Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento   |");
         puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore                                   |");
+        puts("|  6  |  Inserimento dei numeri della serie geomtrica                                                 |");
         puts("|  7  |  Prodotto dei numeri di indice primo                                                          |");
         puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
         puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
@@ -181,6 +195,9 @@ int main() {
                 break;
             case 5:
                 visualizzazioneElementiVettore(myArray, maxNumero);
+                break;
+            case 6:
+                serieGeometrica(myArray, maxNumero);
                 break;
             case 7:
                 prodottoNumeriIndicePrimo(myArray, maxNumero);
