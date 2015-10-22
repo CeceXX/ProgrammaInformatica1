@@ -1,28 +1,29 @@
 /*
- Progetto Informatica n
+ Progetto Informatica
  Gruppo 4: Belletta, De Cal, Tesi, Valeri
- Viene richiesto un programma organizzato per funzioni che preveda un menu con la possibilita` di scelta tra le seguenti operazioni:
- 1. Azzeramento del vettore
- 2. Inserimento di tutti i dati da tastiera
- 3. Inserimento di un solo dato nella prima posizione contente zero
- 4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
- 5. La visualizzazione di tutti i dati presenti nel vettore
- 6. L'inserimento dei numeri della serie geometrica
- 7. Il prodotto dei numeri di indice primo
- 8. La somma dei resti della divisione per tre dei numeri pari
- 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
- 10. Ordinamento attraverso l'algoritmo del merge sort
- L'array verra` dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare
+ Viene richiesto un programma organizzato per funzioni che preveda un menu con la possibilità di scelta tra le seguenti operazioni:
+    1. Azzeramento del vettore
+    2. Inserimento di tutti i dati da tastiera
+    3. Inserimento di un solo dato nella prima posizione contente zero
+    4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
+    5. La visualizzazione di tutti i dati presenti nel vettore
+    6. Inserimento dei numeri della serie geometrica
+    7. Il prodotto dei numeri di indice primo
+    8. La somma dei resti della divisione per tre dei numeri pari
+    9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
+    10. Ordinamento attraverso l'algoritmo del merge sort
+ L'array verra dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare.
  */
 
 #include <stdio.h>
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
-#include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza dato una base e un esponente 'pow(base, esponente);'
+#include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
 
 // 1. Azzeramento del vettore
+// - Ogni elemento del vettore verrà azzerato, uno ad uno
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno
+        array[i] = 0;
     }
 }
 
