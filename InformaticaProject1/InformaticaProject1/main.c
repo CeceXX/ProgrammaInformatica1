@@ -18,6 +18,14 @@
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza dato una base e un esponente 'pow(base, esponente);'
 
+//  1. Azzeramento del vettore
+void azzeramentoElementiVettore(int array[], int lunghezza) {
+    for (int i = 0; i < lunghezza; i++) {
+        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno, nel ciclo for
+    }
+}
+
+// 2. inserimento di tutti i dati da tastiera
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         printf("Inserisci l'elemento per la positione %d: ", i + 1);
@@ -25,21 +33,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
     }
 }
 
-void visualizzazioneElementiVettore(int array[], int lunghezza) {
-    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
-    puts("   n  |   valore  ");
-    for (int i = 0; i < lunghezza; i++) {
-        printf("  %2d  |    %3d    \n", i + 1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
-    }
-    puts("-----------------");
-}
-
-void azzeramentoElementiVettore(int array[], int lunghezza) {
-    for (int i = 0; i < lunghezza; i++) {
-        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno, nel ciclo for
-    }
-}
-
+//  3. inserimento di un solo dato nella prima posizione contente zero
 int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
@@ -49,7 +43,16 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
         }
     }
     puts("Non ho trovato alcun elemento contenente 0.");
-    return 1; // restituisci il valore 1 con 'return', ovvero la funzione non ha trovato alcun elemento uguale a zero
+    return 1; // restituisci il val1ore 1 con 'return', ovvero la funzione non ha trovato alcun elemento uguale a zero
+}
+
+void visualizzazioneElementiVettore(int array[], int lunghezza) {
+    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
+    puts("   n  |   valore  ");
+    for (int i = 0; i < lunghezza; i++) {
+        printf("  %2d  |    %3d    \n", i + 1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
+    }
+    puts("-----------------");
 }
 
 int numeroRandom(int min, int max) {
@@ -191,7 +194,7 @@ int main() {
         puts("|  6  |  Inserimento dei numeri della serie geomtrica                                                 |");
         puts("|  7  |  Prodotto dei numeri di indice primo                                                          |");
         puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
-        puts("|  9  |  ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
+        puts("|  9  |  Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
         puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
         puts("-------------------------------------------------------------------------------------------------------");
         
