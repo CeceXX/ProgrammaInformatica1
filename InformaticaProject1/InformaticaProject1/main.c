@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
-#include <math.h> // serve per calcolare la serie geometrica
+#include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza dato una base e un esponente 'pow(base, esponente);'
 
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
@@ -140,23 +140,32 @@ void mergeSort(int *A, int n) {
 }
 
 void serieGeometrica(int array[], int lunghezza) {
-    int r, p, somma;
-    // https://www.youtube.com/watch?v=mcnblnEsf98
-    printf("Inserisci il primo numero della serie geometrica: ");
-    scanf("%d", &p);
+    int r, p, somma; // r è la costante della serie geometrica, p è il primo termine della serie geometrica
+    char inserimento[2];
+    // Maggiori informazioni: https://www.youtube.com/watch?v=mcnblnEsf98
+    printf("Desideri usare il primo elemento del vettore come primo termine della serie geometrica, oppure un altro termine? Y/N: ");
+    scanf("%1s", inserimento);
+    if ((inserimento[0] == 'y') || (inserimento[0] == 'Y')) {
+        p = array[0];
+    } else {
+        printf("Inserisci il primo numero della serie geometrica: ");
+        scanf("%d", &p);
+    }
     printf("Inserisci r: ");
     scanf("%d", &r);
     // la somma geometrica è uguale a a(r^n)/r-1
-    // a è il primo numero della serie
     // n è il numero di elementi della serie
-    // r è la costante della serie
-    // inserisci tutti gli elementi della somma geometrica
+    // il nostro compito qui è quello di inserire tutti gli elementi della somma geometrica nel vettore
     for (int i = 0; i < lunghezza; i++) {
-        array[i] = p*pow(r, i);
+        array[i] = p * pow(r, i);
     }
     
     somma = (p*(pow(r, lunghezza)-1))/(r-1);
-    printf("La somma della serie geometrica equivale a %d.\n", somma);
+    printf("Ho inserito tutti i termini della serie geometrica nel vettore. La somma della serie geometrica equivale a %d.\n", somma);
+}
+
+void ricercaSequenzialeSentinella(int array[], int lunghezza) {
+
 }
 
 int main() {
@@ -182,6 +191,7 @@ int main() {
         puts("|  6  |  Inserimento dei numeri della serie geomtrica                                                 |");
         puts("|  7  |  Prodotto dei numeri di indice primo                                                          |");
         puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
+        puts("|  9  |  ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
         puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
         puts("-------------------------------------------------------------------------------------------------------");
         
@@ -212,6 +222,9 @@ int main() {
                 break;
             case 8:
                 sommaRestoDivisioneNumeriPari(myArray, maxNumero);
+                break;
+            case 9:
+                ricercaSequenzialeSentinella(myArray, maxNumero);
                 break;
             case 10:
                 mergeSort(myArray, maxNumero);
