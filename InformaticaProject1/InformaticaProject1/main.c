@@ -1,16 +1,17 @@
 /*
+ Progetto Informatica n
  Gruppo 4: Belletta, De Cal, Tesi, Valeri
  Viene richiesto un programma organizzato per funzioni che preveda un menu con la possibilita` di scelta tra le seguenti operazioni:
- 1. azzeramento del vettore
- 2. inserimento di tutti i dati da tastiera
- 3. inserimento di un solo dato nella prima posizione contente zero
- 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
- 5. la visualizzazione di tutti i dati presenti nel vettore
- 6. l'inserimento dei numeri della serie geometrica
- 7. il prodotto dei numeri di indice primo
- 8. la somma dei resti della divisione per tre dei numeri pari
- 9. ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
- 10. ordinamento attraverso l'algoritmo del merge sort
+ 1. Azzeramento del vettore
+ 2. Inserimento di tutti i dati da tastiera
+ 3. Inserimento di un solo dato nella prima posizione contente zero
+ 4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
+ 5. La visualizzazione di tutti i dati presenti nel vettore
+ 6. L'inserimento dei numeri della serie geometrica
+ 7. Il prodotto dei numeri di indice primo
+ 8. La somma dei resti della divisione per tre dei numeri pari
+ 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
+ 10. Ordinamento attraverso l'algoritmo del merge sort
  L'array verra` dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare
  */
 
@@ -18,14 +19,14 @@
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza dato una base e un esponente 'pow(base, esponente);'
 
-//  1. Azzeramento del vettore
+// 1. Azzeramento del vettore
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno
     }
 }
 
-// 2. inserimento di tutti i dati da tastiera
+// 2. Inserimento di tutti i dati da tastiera
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         printf("Inserisci l'elemento per la positione %d: ", i + 1);
@@ -33,7 +34,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
     }
 }
 
-//  3. inserimento di un solo dato nella prima posizione contente zero
+// 3. Inserimento di un solo dato nella prima posizione contente zero
 int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
@@ -46,15 +47,7 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     return 1; // restituisci il val1ore 1 con 'return', ovvero la funzione non ha trovato alcun elemento uguale a zero
 }
 
-void visualizzazioneElementiVettore(int array[], int lunghezza) {
-    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
-    puts("   n  |   valore  ");
-    for (int i = 0; i < lunghezza; i++) {
-        printf("  %2d  |    %3d    \n", i + 1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
-    }
-    puts("-----------------");
-}
-
+// 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
 int numeroRandom(int min, int max) {
     int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
     return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
@@ -68,6 +61,40 @@ void inserimentoNumeriCasuali(int array[], int lunghezza) {
     puts("");
 }
 
+// 5. La visualizzazione di tutti i dati presenti nel vettore
+void visualizzazioneElementiVettore(int array[], int lunghezza) {
+    puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
+    puts("   n  |   valore  ");
+    for (int i = 0; i < lunghezza; i++) {
+        printf("  %2d  |    %3d    \n", i + 1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
+    }
+    puts("-----------------");
+}
+
+// 6. L'inserimento dei numeri della serie geometrica
+void serieGeometrica(int array[], int lunghezza) {
+    int r, p, somma; // r è la costante della serie geometrica, p è il primo termine della serie geometrica
+    char inserimento[2];
+    // Maggiori informazioni: https://www.youtube.com/watch?v=mcnblnEsf98
+    printf("Desideri usare il primo elemento del vettore come primo termine della serie geometrica, oppure un altro termine? Y/N: ");
+    scanf("%1s", inserimento);
+    if ((inserimento[0] == 'y') || (inserimento[0] == 'Y')) { // l'utente ha la possibilità di scegliere se usare il primo elemento dell'array come primo termine della serie geometrica
+        p = array[0];
+    } else {
+        printf("Inserisci il primo numero della serie geometrica: ");
+        scanf("%d", &p);
+    }
+    printf("Inserisci r: ");
+    scanf("%d", &r);
+    for (int i = 0; i < lunghezza; i++) {
+        array[i] = p * pow(r, i);   // inserisco tutti i termini della serie geometrica nel vettore
+    }
+    
+    somma = (p*(pow(r, lunghezza)-1))/(r-1);
+    printf("Ho inserito i termini della serie geometrica nel vettore. La somma della serie geometrica equivale a %d.\n", somma);
+}
+
+// 7. Il prodotto dei numeri di indice primo
 int controllaSeNumeroPrimo(int numero) {
     for (int i = 2; i < numero; i++) {
         if (numero % i == 0 && i != numero) {
@@ -87,22 +114,29 @@ void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
     printf("Il prodotto degli elementi del vettore e' %d.\n", prodotto);
 }
 
+// 8. La somma dei resti della divisione per tre dei numeri pari
 void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
     int somma = 0;
     for (int i = 0; i < lunghezza; i++) {
         
-        // - if (condizione) {...}
-        // il codice all'interno dell'if viene eseguito se la condizione è VERA
+        // if (condizione) {...}
+        // il codice all'interno dell'if viene eseguito solo se la (condizione) è VERA
         // altrimenti, se la condizione è FALSA, non viene eseguito
         // if (1) {...} viene eseguito perchè se all'interno della condizione c'è un numero DIVERSO DA ZERO, allora la condizione è VERA
         // if (0) {...} viene eseguito perchè se all'interno della condizione c'è ZERO, allora la condizione è FALSA
-        if (!(array[i] % 2)) { // il punto esclamatico significa "opposto di", se if (condizione) {...} è FALSO, allora if (!(condizione)) è FALSO per il punto esclamativo
+        if (!(array[i] % 2)) { // il punto esclamatico significa "opposto di", se if (condizione) {...} è VERO, allora if (!(condizione)) è FALSO a causa del punto esclamativo, che INVERTE la condizione
             somma += array[i] % 3;
         }
     }
     printf("La somma e' %d.\n", somma);
 }
 
+// 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
+void ricercaSequenzialeSentinella(int array[], int lunghezza) {
+
+}
+
+// 10. Ordinamento attraverso l'algoritmo del merge sort
 void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
     int i, j, k;
     
@@ -142,35 +176,6 @@ void mergeSort(int *A, int n) {
     free(R);
 }
 
-void serieGeometrica(int array[], int lunghezza) {
-    int r, p, somma; // r è la costante della serie geometrica, p è il primo termine della serie geometrica
-    char inserimento[2];
-    // Maggiori informazioni: https://www.youtube.com/watch?v=mcnblnEsf98
-    printf("Desideri usare il primo elemento del vettore come primo termine della serie geometrica, oppure un altro termine? Y/N: ");
-    scanf("%1s", inserimento);
-    if ((inserimento[0] == 'y') || (inserimento[0] == 'Y')) {
-        p = array[0];
-    } else {
-        printf("Inserisci il primo numero della serie geometrica: ");
-        scanf("%d", &p);
-    }
-    printf("Inserisci r: ");
-    scanf("%d", &r);
-    // la somma geometrica è uguale a a(r^n)/r-1
-    // n è il numero di elementi della serie
-    // il nostro compito qui è quello di inserire tutti gli elementi della somma geometrica nel vettore
-    for (int i = 0; i < lunghezza; i++) {
-        array[i] = p * pow(r, i);
-    }
-    
-    somma = (p*(pow(r, lunghezza)-1))/(r-1);
-    printf("Ho inserito tutti i termini della serie geometrica nel vettore. La somma della serie geometrica equivale a %d.\n", somma);
-}
-
-void ricercaSequenzialeSentinella(int array[], int lunghezza) {
-
-}
-
 int main() {
     int myArray[150], maxNumero, inserimento;
     
@@ -183,7 +188,7 @@ int main() {
         scanf("%d", &maxNumero);
     }
     
-    while (1) { // while (1) {...} eseguirà il codice all'infinito perchè 1 (come qualsiasi numero != 0) è considerato VERO
+    while (1) { // while (1) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato VERO
         puts("-------------------------------------------------------------------------------------------------------");
         puts("|  1  |  Azzeramento del vettore                                                                      |");
         puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
