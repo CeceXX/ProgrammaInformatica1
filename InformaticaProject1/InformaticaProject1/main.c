@@ -21,7 +21,7 @@
 //  1. Azzeramento del vettore
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno, nel ciclo for
+        array[i] = 0; // ogni elemento del vettore verrà azzerato, uno ad uno
     }
 }
 
@@ -175,16 +175,15 @@ int main() {
     int myArray[150], maxNumero, inserimento;
     
     printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
-    
     scanf("%d", &maxNumero);
     
-    // controlla se il numero e' maggiore compreso di 1. Non esiste un'array con 0 elementi!
-    while (maxNumero < 1) {
-        printf("Riprova! Inserisci un numero maggiore di 0: ");
+    // controlla se il numero è maggiore compreso di 1. Non esiste un'array con 0 elementi!
+    while ((maxNumero < 1) || (maxNumero > 10)) {
+        printf("Riprova! Inserisci un numero compreso tra 1 e 10: ");
         scanf("%d", &maxNumero);
     }
     
-    while (1) {
+    while (1) { // while (1) {...} eseguirà il codice all'infinito perchè 1 (come qualsiasi numero != 0) è considerato VERO
         puts("-------------------------------------------------------------------------------------------------------");
         puts("|  1  |  Azzeramento del vettore                                                                      |");
         puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
@@ -233,7 +232,7 @@ int main() {
                 mergeSort(myArray, maxNumero);
                 break;
             default:
-                printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento); // se l'inserimento non è compreso tra 1 e 10, allora non è valido
+                printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento); // se l'opzione scelta non è compresa tra 1 e 10, allora non è valida
                 break;
         }
     }
