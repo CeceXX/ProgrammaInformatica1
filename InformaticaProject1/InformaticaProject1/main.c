@@ -14,12 +14,12 @@
     10. Ordinamento attraverso l'algoritmo del merge sort
  L'array verra dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare.
  */
-
 #include <stdio.h>
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
 
-// 1. Azzeramento del vettore
+
+// 1. Azzeramento del vettore (Gianluca Tesi)
 // - Ogni elemento del vettore verrà azzerato, uno ad uno
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
@@ -27,7 +27,7 @@ void azzeramentoElementiVettore(int array[], int lunghezza) {
     }
 }
 
-// 2. Inserimento di tutti i dati da tastiera
+// 2. Inserimento di tutti i dati da tastiera (Elis Belletta)
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         printf("Inserisci l'elemento per la positione %d: ", i + 1);
@@ -35,7 +35,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
     }
 }
 
-// 3. Inserimento di un solo dato nella prima posizione contente zero
+// 3. Inserimento di un solo dato nella prima posizione contente zero (Gianluca Tesi)
 int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
@@ -48,7 +48,7 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     return 1; // restituisci il val1ore 1 con 'return', ovvero la funzione non ha trovato alcun elemento uguale a zero
 }
 
-// 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
+// 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento (Gianluca Tesi)
 int numeroRandom(int min, int max) {
     int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
     return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
@@ -62,7 +62,7 @@ void inserimentoNumeriCasuali(int array[], int lunghezza) {
     puts("");
 }
 
-// 5. La visualizzazione di tutti i dati presenti nel vettore
+// 5. La visualizzazione di tutti i dati presenti nel vettore (Paolo Valeri)
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
     puts("   n  |   valore  ");
@@ -72,7 +72,7 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------");
 }
 
-// 6. L'inserimento dei numeri della serie geometrica
+// 6. L'inserimento dei numeri della serie geometrica (Elis Belletta)
 void serieGeometrica(int array[], int lunghezza) {
     int r, p, somma; // r è la costante della serie geometrica, p è il primo termine della serie geometrica
     char inserimento[2];
@@ -95,7 +95,7 @@ void serieGeometrica(int array[], int lunghezza) {
     printf("Ho inserito i termini della serie geometrica nel vettore. La somma della serie geometrica equivale a %d.\n", somma);
 }
 
-// 7. Il prodotto dei numeri di indice primo
+// 7. Il prodotto dei numeri di indice primo (Elis Belletta)
 int controllaSeNumeroPrimo(int numero) {
     for (int i = 2; i < numero; i++) {
         if (numero % i == 0 && i != numero) {
@@ -115,7 +115,7 @@ void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
     printf("Il prodotto degli elementi del vettore e' %d.\n", prodotto);
 }
 
-// 8. La somma dei resti della divisione per tre dei numeri pari
+// 8. La somma dei resti della divisione per tre dei numeri pari (Elis Belletta)
 void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
     int somma = 0;
     for (int i = 0; i < lunghezza; i++) {
@@ -132,12 +132,12 @@ void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
     printf("La somma e' %d.\n", somma);
 }
 
-// 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
+// 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella (Cesare de Cal)
 void ricercaSequenzialeSentinella(int array[], int lunghezza) {
 
 }
 
-// 10. Ordinamento attraverso l'algoritmo del merge sort
+// 10. Ordinamento attraverso l'algoritmo del merge sort (Cesare de Cal)
 void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
     int i, j, k;
     
@@ -177,6 +177,7 @@ void mergeSort(int *A, int n) {
     free(R);
 }
 
+// Il programma parte dalla funzione main() (Paolo Valeri)
 int main() {
     int myArray[150], maxNumero, inserimento;
     
