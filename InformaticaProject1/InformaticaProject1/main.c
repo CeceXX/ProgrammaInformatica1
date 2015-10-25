@@ -133,8 +133,19 @@ void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
 }
 
 // 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella (Cesare de Cal)
-void ricercaSequenzialeSentinella(int array[], int lunghezza) {
-
+int ricercaSequenzialeSentinella(int array[], int lunghezza) {
+    int elementoDaCercare;
+    printf("Inserisci l'elemento da cercare nel vettore: ");
+    scanf("%d", &elementoDaCercare);
+    
+    for (int i = 0; i < lunghezza; i++) {
+        if (array[i] == elementoDaCercare) {
+            printf("Ho trovato '%d' alla posizione %d.", elementoDaCercare, i);
+            return i;
+        }
+    }
+    printf("Non ho trovato l'elemento '%d' nel vettore.\n", elementoDaCercare);
+    return -1; // la posizione -1 nel vettore non esiste, perchè si conta da 0
 }
 
 // 10. Ordinamento attraverso l'algoritmo del merge sort (Cesare de Cal)
@@ -185,8 +196,8 @@ int main() {
     scanf("%d", &maxNumero);
     
     // controlla se il numero è maggiore compreso di 1. Non esiste un'array con 0 elementi!
-    while ((maxNumero < 1) || (maxNumero > 10)) {
-        printf("Riprova! Inserisci un numero compreso tra 1 e 10: ");
+    while (maxNumero < 1) {
+        printf("Non esiste un vettore con %d elementi. Inserisci un numero maggiore di 0: ", maxNumero);
         scanf("%d", &maxNumero);
     }
     
@@ -206,6 +217,10 @@ int main() {
         
         printf("Scegli un'opzione del menu: ");
         scanf("%d", &inserimento);
+        while ((inserimento < 1) || (inserimento > 10)) {
+            printf("'%d' non e' un'opzione valida. Inserisci un'opzione compresa tra 1 e 10: ", inserimento); // se l'opzione scelta non è compresa tra 1 e 10, allora non è valida
+            scanf("%d", &inserimento);
+        }
         
         switch (inserimento) {
             case 1:
@@ -239,7 +254,6 @@ int main() {
                 mergeSort(myArray, maxNumero);
                 break;
             default:
-                printf("'%d' non e' un'opzione valida. Riprova!\n", inserimento); // se l'opzione scelta non è compresa tra 1 e 10, allora non è valida
                 break;
         }
     }
