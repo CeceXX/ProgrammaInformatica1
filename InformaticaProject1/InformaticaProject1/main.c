@@ -207,7 +207,7 @@ void probabilitaPoisson(int lunghezzaVettoreX) {
     printf("Inserisci N (compreso tra 10 e 1000): ");
     scanf("%f", &N);
     while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
-        printf("Errore! N deve essere compreso tra 10 e 100). Inserisci N: ");
+        printf("Errore! N deve essere compreso tra 10 e 100. Inserisci N: ");
         scanf("%f", &N);
     }
     
@@ -220,22 +220,21 @@ void probabilitaPoisson(int lunghezzaVettoreX) {
     }
     
     // Dichiarazione dei vettori che conterranno le x e le frequenze. Entrambe contengono lo stesso numero di elementi perchè ad ogni x corrisponde una certa frequenza
-    float vettoreX[lunghezzaVettoreX], vettoreFrequenze[lunghezzaVettoreX];
+    float vettoreX[lunghezzaVettoreX]; //, vettoreFrequenze[lunghezzaVettoreX];
     
     // Riempimento del vettore che raccoglie le x di numeri casuali
     for (int i = 0; i < lunghezzaVettoreX; i++) {
-        vettoreX[i] = numeroRandomFloat(0, N);
+        vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
     }
     
-    // La formula necessita di tre variabili: N, p, x
+    // La formula necessita di tre variabili: N, p, x:
     //             x        N-x
     //       N! * p  (1 - p)
     // p  =  ------------------
     //  x      x! * (N - x)!
     //
     
-    // Calcola il fattoriale di un numero cioè il numero moltiplicato per tutti i numeri precedenti a esso es. 5!= 1*2*3*4*5
-    // fattoriale di N
+    // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
     float fattorialeN = 1, fattorialeX = 1;
     
     // Calcolo il fattoriale di N
@@ -243,19 +242,21 @@ void probabilitaPoisson(int lunghezzaVettoreX) {
         fattorialeN *= i;
     }
     
-    // Calcolo il fattoriale di ogni x
-    for (int i = 1; i < N+1; i++) {
-        fattorialeN *= i;
+    // Calcolo il fattoriale di ogni elemento del vettore di X. Strategia: usare due cicli for
+    // Scorri tra gli elementi dell'array
+    for (int p = 1; p < lunghezzaVettoreX; p++) {
+        for (int i = 1; i < vettoreX[p]; i++) {
+            // ...per ogni elemento calcola il suo fattoriale
+            fattorialeX *= i;
+        }
     }
     
     printf("Fattoriale di N = %f\n", fattorialeN);
 
     // calcola la probabilità di Poisson
     for (int i = 0; i < lunghezzaVettoreX; i++) {
-        float pPoisson = fattorialeN * pow(probabilita, vettoreX[i]);
+        // float pPoisson = fattorialeN * pow(probabilita, vettoreX[i]);
     }
-    
-
 }
 
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
