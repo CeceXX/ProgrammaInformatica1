@@ -1,3 +1,0 @@
-# Programma Informatica
-
-School project. 
