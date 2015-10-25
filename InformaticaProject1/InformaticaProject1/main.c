@@ -222,13 +222,18 @@ void probabilitaPoisson(int lunghezzaVettoreX) {
         x[i] = numeroRandomFloat(0, N); // riempi il vettore di numeri casuali
     }
     
-    //             x      N-x
-    //       N! * p  (1-p)
-    // p  = -----------------
-    //  x       x!*(N-x)!
+    //             x        N-x
+    //       N! * p  (1 - p)
+    // p  =  ------------------
+    //  x      x! * (N - x)!
     //
     // calcola il fattoriale di un numero cioè il numero moltiplicato per tutti i numeri precedenti a esso es. 5!= 1*2*3*4*5
-    
+    // fattoriale di N
+    float fattorialeN = 1, fattorialeX = 1;
+    for (int i = 1; i < N+1; i++) {
+        fattorialeN *= i;
+    }
+    printf("Fattoriale di N = %f\n", fattorialeN);
 }
 
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
