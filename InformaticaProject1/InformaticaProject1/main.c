@@ -30,7 +30,7 @@ void azzeramentoElementiVettore(int array[], int lunghezza) {
 // 2. Inserimento di tutti i dati da tastiera (Elis Belletta)
 void inserimentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        printf("Inserisci l'elemento per la positione %d: ", i + 1);
+        printf("Inserisci l'elemento per la positione %d: ", i+1);
         scanf("%d", &array[i]); // acquisisci un numero da tastiera da inserire nel vettore
     }
 }
@@ -39,7 +39,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
 int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
-            printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i + 1);
+            printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i+1);
             scanf("%d", &array[i]); // acquisici un numero da tastiera
             return 0; // appena trova 0, si esce dalla funzione con 'return' perchè non la funzione non ci serve più
         }
@@ -67,7 +67,7 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
     puts("   n  |   valore  ");
     for (int i = 0; i < lunghezza; i++) {
-        printf("  %2d  |    %3d    \n", i + 1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
+        printf("  %2d  |    %3d    \n", i+1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
     }
     puts("-----------------");
 }
@@ -129,23 +129,27 @@ void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
             somma += array[i] % 3;
         }
     }
-    printf("La somma e' %d.\n", somma);
+    printf("La somma e dei resti degli elementi del vettore e' %d.\n", somma);
 }
 
 // 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella (Cesare de Cal)
-int ricercaSequenzialeSentinella(int array[], int lunghezza) {
+void ricercaLineareSentinella(int array[], int lunghezza) {
     int elementoDaCercare;
-    printf("Inserisci l'elemento da cercare nel vettore: ");
+    printf("Inserisci l'elemento da cercare: ");
     scanf("%d", &elementoDaCercare);
+
+    array[lunghezza + 1] = elementoDaCercare;
+    int i = 0;
     
-    for (int i = 0; i < lunghezza; i++) {
-        if (array[i] == elementoDaCercare) {
-            printf("Ho trovato '%d' alla posizione %d.", elementoDaCercare, i);
-            return i;
-        }
+    while (array[i] != elementoDaCercare) {
+        i++;
     }
-    printf("Non ho trovato l'elemento '%d' nel vettore.\n", elementoDaCercare);
-    return -1; // la posizione -1 nel vettore non esiste, perchè si conta da 0
+    
+    if (array[i] == elementoDaCercare) {
+        printf("Ho trovato %d alla posizione %d.\n", elementoDaCercare, i);
+    } else {
+        printf("Non ho trovato %d nel vettore.\n", elementoDaCercare, i);
+    }
 }
 
 // 10. Ordinamento attraverso l'algoritmo del merge sort (Cesare de Cal)
@@ -190,9 +194,9 @@ void mergeSort(int *A, int n) {
 
 // Il programma parte dalla funzione main() (Paolo Valeri)
 int main() {
-    int myArray[150], maxNumero, inserimento;
+    int myArray[150], maxNumero, inserimento; // come richiesta: "L'array verra dichiarato con una dimensione di 150 elementi"...
     
-    printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
+    printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: "); // "ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare"
     scanf("%d", &maxNumero);
     
     // controlla se il numero è maggiore compreso di 1. Non esiste un'array con 0 elementi!
@@ -248,7 +252,7 @@ int main() {
                 sommaRestoDivisioneNumeriPari(myArray, maxNumero);
                 break;
             case 9:
-                ricercaSequenzialeSentinella(myArray, maxNumero);
+                ricercaLineareSentinella(myArray, maxNumero);
                 break;
             case 10:
                 mergeSort(myArray, maxNumero);
