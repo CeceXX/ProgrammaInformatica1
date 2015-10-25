@@ -126,7 +126,7 @@ void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
         // if (1) {...} viene eseguito perchè se all'interno della condizione c'è un numero DIVERSO DA ZERO, allora la condizione è VERA
         // if (0) {...} viene eseguito perchè se all'interno della condizione c'è ZERO, allora la condizione è FALSA
         if (!(array[i] % 2)) { // il punto esclamatico significa "opposto di", se if (condizione) {...} è VERO, allora if (!(condizione)) è FALSO a causa del punto esclamativo, che INVERTE la condizione
-            somma += array[i] % 3;
+            somma += array[i] % 3; // 'somma += 1'rr è lo stesso modo di dire 'somma = somma + 1'
         }
     }
     printf("La somma e dei resti degli elementi del vettore e' %d.\n", somma);
@@ -148,7 +148,7 @@ void ricercaLineareSentinella(int array[], int lunghezza) {
     if (array[i] == elementoDaCercare) {
         printf("Ho trovato %d alla posizione %d.\n", elementoDaCercare, i);
     } else {
-        printf("Non ho trovato %d nel vettore.\n", elementoDaCercare, i);
+        printf("Non ho trovato %d nel vettore.\n", elementoDaCercare);
     }
 }
 
@@ -217,12 +217,13 @@ int main() {
         puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
         puts("|  9  |  Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
         puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
+        puts("|  11 |  Probabilita' di Poisson                                                                      |");
         puts("-------------------------------------------------------------------------------------------------------");
         
         printf("Scegli un'opzione del menu: ");
         scanf("%d", &inserimento);
-        while ((inserimento < 1) || (inserimento > 10)) {
-            printf("'%d' non e' un'opzione valida. Inserisci un'opzione compresa tra 1 e 10: ", inserimento); // se l'opzione scelta non è compresa tra 1 e 10, allora non è valida
+        while ((inserimento < 1) || (inserimento > 11)) {
+            printf("'%d' non e' un'opzione valida. Inserisci un'opzione compresa tra 1 e 10: ", inserimento); // se l'opzione scelta non è compresa tra 1 e 11, allora non è valida
             scanf("%d", &inserimento);
         }
         
@@ -256,6 +257,8 @@ int main() {
                 break;
             case 10:
                 mergeSort(myArray, maxNumero);
+                break;
+            case 11:
                 break;
             default:
                 break;
