@@ -12,6 +12,7 @@
     8. La somma dei resti della divisione per tre dei numeri pari
     9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
     10. Ordinamento attraverso l'algoritmo del merge sort
+    11. Probabilità di Poisson
  L'array verra dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare.
  */
 #include <stdio.h>
@@ -49,14 +50,19 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
 }
 
 // 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento (Gianluca Tesi)
-int numeroRandom(int min, int max) {
+int numeroRandomInt(int min, int max) {
     int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
     return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
 }
 
+int numeroRandomFloat(float min, float max) {
+    int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
+    return (float) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
+}
+
 void inserimentoNumeriCasuali(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        int r = numeroRandom(200, 300); // passa alla funzione 'numeroRandom' il numero 'min' e quello 'max' su cui operare
+        int r = numeroRandomInt(200, 300); // passa alla funzione 'numeroRandom' il numero 'min' e quello 'max' su cui operare
         array[i] = r; // poi assegna a ciasuno elemento il valore casuale generato
     }
     puts("");
@@ -190,9 +196,42 @@ void mergeSort(int *A, int n) {
     Merge(A, L, mid, R, n-mid);  // Unisce i vettori L e R into A as sorted list.
     free(L); // dopo aver creato uno spazio in memoria, ora liberalo con free() - questa funzione libera lo spazio di memoria HEAP
     free(R);
+    puts("Ho ordinato il vettore con successo.");
 }
 
-// Il programma parte dalla funzione main() (Paolo Valeri)
+void probabilitaPoisson(int lunghezzaVettoreX) {
+    float N, probabilita; // float perchè supportano cifre decimali
+    printf("Inserisci N (compreso tra 10 e 1000): ");
+    scanf("%f", &N);
+    
+    while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
+        printf("Errore! N deve essere compreso tra 10 e 100). Inserisci N: ");
+        scanf("%f", &N);
+    }
+    
+    printf("Inserisci la probabilita': ");
+    scanf("%f", &probabilita);
+    
+    while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
+        printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
+        scanf("%f", &probabilita);
+    }
+    
+    float x[lunghezzaVettoreX]; // vettore che raccoglie le x
+    for (int i = 0; i < lunghezzaVettoreX; i++) {
+        x[i] = numeroRandomFloat(0, N); // riempi il vettore di numeri casuali
+    }
+    
+    //             x      N-x
+    //       N! * p  (1-p)
+    // p  = -----------------
+    //  x       x!*(N-x)!
+    //
+    // calcola il fattoriale di un numero cioè il numero moltiplicato per tutti i numeri precedenti a esso es. 5!= 1*2*3*4*5
+    
+}
+
+// Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
 int main() {
     int myArray[150], maxNumero, inserimento; // come richiesta: "L'array verra dichiarato con una dimensione di 150 elementi"...
     
@@ -259,6 +298,7 @@ int main() {
                 mergeSort(myArray, maxNumero);
                 break;
             case 11:
+                probabilitaPoisson(maxNumero);
                 break;
             default:
                 break;
