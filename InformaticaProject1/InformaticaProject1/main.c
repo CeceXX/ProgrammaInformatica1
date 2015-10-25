@@ -200,40 +200,62 @@ void mergeSort(int *A, int n) {
 }
 
 void probabilitaPoisson(int lunghezzaVettoreX) {
-    float N, probabilita; // float perchè supportano cifre decimali
+    // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
+    float N, probabilita;
+    
+    // Acquisizione N
     printf("Inserisci N (compreso tra 10 e 1000): ");
     scanf("%f", &N);
-    
     while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
         printf("Errore! N deve essere compreso tra 10 e 100). Inserisci N: ");
         scanf("%f", &N);
     }
     
+    // Acquisizione probabilità
     printf("Inserisci la probabilita': ");
     scanf("%f", &probabilita);
-    
     while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
         printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
         scanf("%f", &probabilita);
     }
     
-    float x[lunghezzaVettoreX]; // vettore che raccoglie le x
+    // Dichiarazione dei vettori che conterranno le x e le frequenze. Entrambe contengono lo stesso numero di elementi perchè ad ogni x corrisponde una certa frequenza
+    float vettoreX[lunghezzaVettoreX], vettoreFrequenze[lunghezzaVettoreX];
+    
+    // Riempimento del vettore che raccoglie le x di numeri casuali
     for (int i = 0; i < lunghezzaVettoreX; i++) {
-        x[i] = numeroRandomFloat(0, N); // riempi il vettore di numeri casuali
+        vettoreX[i] = numeroRandomFloat(0, N);
     }
     
+    // La formula necessita di tre variabili: N, p, x
     //             x        N-x
     //       N! * p  (1 - p)
     // p  =  ------------------
     //  x      x! * (N - x)!
     //
-    // calcola il fattoriale di un numero cioè il numero moltiplicato per tutti i numeri precedenti a esso es. 5!= 1*2*3*4*5
+    
+    // Calcola il fattoriale di un numero cioè il numero moltiplicato per tutti i numeri precedenti a esso es. 5!= 1*2*3*4*5
     // fattoriale di N
     float fattorialeN = 1, fattorialeX = 1;
+    
+    // Calcolo il fattoriale di N
     for (int i = 1; i < N+1; i++) {
         fattorialeN *= i;
     }
+    
+    // Calcolo il fattoriale di ogni x
+    for (int i = 1; i < N+1; i++) {
+        fattorialeN *= i;
+    }
+    
     printf("Fattoriale di N = %f\n", fattorialeN);
+
+    // calcola la probabilità di Poisson
+    for (int i = 0; i < lunghezzaVettoreX; i++) {
+        float pPoisson = fattorialeN * pow(probabilita, vettoreX[i]);
+    }
+    
+
 }
 
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
