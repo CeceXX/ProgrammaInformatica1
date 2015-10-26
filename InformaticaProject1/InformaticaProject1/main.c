@@ -2,17 +2,19 @@
  Progetto Informatica
  Gruppo 4: Belletta, De Cal, Tesi, Valeri
  Viene richiesto un programma organizzato per funzioni che preveda un menu con la possibilità di scelta tra le seguenti operazioni:
-    1. Azzeramento del vettore
-    2. Inserimento di tutti i dati da tastiera
-    3. Inserimento di un solo dato nella prima posizione contente zero
-    4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
-    5. La visualizzazione di tutti i dati presenti nel vettore
-    6. Inserimento dei numeri della serie geometrica
-    7. Il prodotto dei numeri di indice primo
-    8. La somma dei resti della divisione per tre dei numeri pari
-    9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
-    10. Ordinamento attraverso l'algoritmo del merge sort
-    11. Probabilità di Poisson
+ 1. Azzeramento del vettore
+ 2. Inserimento di tutti i dati da tastiera
+ 3. Inserimento di un solo dato nella prima posizione contente zero
+ 4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento
+ 5. La visualizzazione di tutti i dati presenti nel vettore
+ 6. Inserimento dei numeri della serie geometrica
+ 7. Il prodotto dei numeri di indice primo
+ 8. La somma dei resti della divisione per tre dei numeri pari
+ 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella
+ 10. Ordinamento attraverso l'algoritmo del merge sort
+ 11. Probabilità di Poisson
+ 12. (Probabilità di Poisson) Visualizza elementi vettore x
+ 13. (Probabilità di Poisson) Visualizza elementi vettore frequenze
  L'array verra dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare.
  */
 #include <stdio.h>
@@ -143,7 +145,7 @@ void ricercaLineareSentinella(int array[], int lunghezza) {
     int elementoDaCercare;
     printf("Inserisci l'elemento da cercare: ");
     scanf("%d", &elementoDaCercare);
-
+    
     array[lunghezza + 1] = elementoDaCercare;
     int i = 0;
     
@@ -199,63 +201,75 @@ void mergeSort(int *A, int n) {
     puts("Ho ordinato il vettore con successo.");
 }
 
-void probabilitaPoisson(int lunghezzaVettoreX) {
-    // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
-    float N, probabilita;
+void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     
-    // Acquisizione N
-    printf("Inserisci N (compreso tra 10 e 1000): ");
-    scanf("%f", &N);
-    while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
-        printf("Errore! N deve essere compreso tra 10 e 100. Inserisci N: ");
+    // Nel menu principale, l'utente puo' scegliere se calcolare la probabilità di Poisson (opzione 11), se visualizzare il vettore delle x (12), oppure quello delle frequenze (13)
+    if (opzioneSceltaUtente == 0) {
+        
+        // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
+        float N, probabilita;
+        
+        // Acquisizione N
+        printf("Inserisci N (compreso tra 10 e 1000): ");
         scanf("%f", &N);
-    }
-    
-    // Acquisizione probabilità
-    printf("Inserisci la probabilita': ");
-    scanf("%f", &probabilita);
-    while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
-        printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
-        scanf("%f", &probabilita);
-    }
-    
-    // Dichiarazione dei vettori che conterranno le x e le frequenze. Entrambe contengono lo stesso numero di elementi perchè ad ogni x corrisponde una certa frequenza
-    float vettoreX[lunghezzaVettoreX]; //, vettoreFrequenze[lunghezzaVettoreX];
-    
-    // Riempimento del vettore che raccoglie le x di numeri casuali
-    for (int i = 0; i < lunghezzaVettoreX; i++) {
-        vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
-    }
-    
-    // La formula necessita di tre variabili: N, p, x:
-    //             x        N-x
-    //       N! * p  (1 - p)
-    // p  =  ------------------
-    //  x      x! * (N - x)!
-    //
-    
-    // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
-    float fattorialeN = 1, fattorialeX = 1;
-    
-    // Calcolo il fattoriale di N
-    for (int i = 1; i < N+1; i++) {
-        fattorialeN *= i;
-    }
-    
-    // Calcolo il fattoriale di ogni elemento del vettore di X. Strategia: usare due cicli for
-    // Scorri tra gli elementi dell'array
-    for (int p = 1; p < lunghezzaVettoreX; p++) {
-        for (int i = 1; i < vettoreX[p]; i++) {
-            // ...per ogni elemento calcola il suo fattoriale
-            fattorialeX *= i;
+        while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
+            printf("Errore! N deve essere compreso tra 10 e 100. Inserisci N: ");
+            scanf("%f", &N);
         }
-    }
-    
-    printf("Fattoriale di N = %f\n", fattorialeN);
-
-    // calcola la probabilità di Poisson
-    for (int i = 0; i < lunghezzaVettoreX; i++) {
-        // float pPoisson = fattorialeN * pow(probabilita, vettoreX[i]);
+        
+        // Acquisizione probabilità
+        printf("Inserisci la probabilita': ");
+        scanf("%f", &probabilita);
+        while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
+            printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
+            scanf("%f", &probabilita);
+        }
+        
+        // Dichiarazione dei vettori che conterranno le x e le frequenze. Entrambe contengono lo stesso numero di elementi perchè ad ogni x corrisponde una certa frequenza
+        float vettoreX[lunghezzaVettoreX], vettoreFrequenze[lunghezzaVettoreX];
+        
+        // Riempimento del vettore che raccoglie le x di numeri casuali
+        for (int i = 0; i < lunghezzaVettoreX; i++) {
+            vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
+        }
+        
+        // La formula necessita di tre variabili: N, p, x:
+        //             x          N-x
+        //       N! * p  * (1 - p)
+        // p  =  ------------------
+        //  x      x! * (N - x)!
+        //
+        
+        // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
+        float fattorialeN = 1, fattorialeX = 1;
+        
+        // Calcolo il fattoriale di N
+        for (int i = 1; i < N+1; i++) {
+            fattorialeN *= i;
+        }
+        
+        // Calcolo il fattoriale di ogni elemento del vettore di X. Strategia: usare due cicli for
+        // Scorri tra gli elementi dell'array
+        for (int p = 1; p < lunghezzaVettoreX; p++) {
+            for (int i = 1; i < vettoreX[p]; i++) {
+                // ...per ogni elemento calcola il suo fattoriale
+                fattorialeX *= i;
+            }
+            // poi aggiungilo all'array delle frequenze
+            vettoreFrequenze[p] = fattorialeX;
+            fattorialeX = 1;
+        }
+        
+        printf("Fattoriale di N = %f\n", fattorialeN);
+        
+        // calcola la probabilità di Poisson
+        for (int i = 0; i < lunghezzaVettoreX; i++) {
+            // float pPoisson = fattorialeN * pow(probabilita, vettoreX[i]);
+        }
+    } else if (opzioneSceltaUtente == 1) {
+        // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
+    } else if (opzioneSceltaUtente == 2) {
+        // L'utente ha scelto di visualizzare gli elementi contenuti del vettore delle frequenze
     }
 }
 
@@ -284,12 +298,12 @@ int main() {
         puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
         puts("|  9  |  Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
         puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
-        puts("|  11 |  Probabilita' di Poisson                                                                      |");
+        puts("|  11 |  Probabilita' di Poisson (12 per visualizzare vettore delle x, 13 per vettore frequenze       |");
         puts("-------------------------------------------------------------------------------------------------------");
         
         printf("Scegli un'opzione del menu: ");
         scanf("%d", &inserimento);
-        while ((inserimento < 1) || (inserimento > 11)) {
+        while ((inserimento < 1) || (inserimento > 13)) {
             printf("'%d' non e' un'opzione valida. Inserisci un'opzione compresa tra 1 e 10: ", inserimento); // se l'opzione scelta non è compresa tra 1 e 11, allora non è valida
             scanf("%d", &inserimento);
         }
@@ -326,7 +340,13 @@ int main() {
                 mergeSort(myArray, maxNumero);
                 break;
             case 11:
-                probabilitaPoisson(maxNumero);
+                probabilitaPoisson(maxNumero, 0);
+                break;
+            case 12:
+                probabilitaPoisson(maxNumero, 1);
+                break;
+            case 13:
+                probabilitaPoisson(maxNumero, 2);
                 break;
             default:
                 break;
