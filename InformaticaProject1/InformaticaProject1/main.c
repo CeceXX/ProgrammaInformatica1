@@ -81,10 +81,11 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
 }
 
 // 6. L'inserimento dei numeri della serie geometrica (Elis Belletta)
+// - Maggiori informazioni su come funziona la serie geometrica: https://www.youtube.com/watch?v=mcnblnEsf98
+// - È necessario trovare i termini della serie geometrica date r e p
 void serieGeometrica(int array[], int lunghezza) {
     int r, p, somma; // r è la costante della serie geometrica, p è il primo termine della serie geometrica
     char inserimento[2];
-    // Maggiori informazioni: https://www.youtube.com/watch?v=mcnblnEsf98
     printf("Desideri usare il primo elemento del vettore come primo termine della serie geometrica, oppure un altro termine? Y/N: ");
     scanf("%1s", inserimento);
     if ((inserimento[0] == 'y') || (inserimento[0] == 'Y')) { // l'utente ha la possibilità di scegliere se usare il primo elemento dell'array come primo termine della serie geometrica
@@ -99,11 +100,13 @@ void serieGeometrica(int array[], int lunghezza) {
         array[i] = p * pow(r, i);   // inserisco tutti i termini della serie geometrica nel vettore
     }
     
-    somma = (p*(pow(r, lunghezza)-1))/(r-1);
+    // La somma dei termini della serie geometrica non è richiesta, ma è un'aggiunta utile
+    somma = (p * (pow(r, lunghezza) - 1))/ (r - 1);
     printf("Ho inserito i termini della serie geometrica nel vettore. La somma della serie geometrica equivale a %d.\n", somma);
 }
 
 // 7. Il prodotto dei numeri di indice primo (Elis Belletta)
+// - Ho usato due funzioni per questo esercizio, "controllaSeNumeroPrimo" e "prodottoNumeriIndicePrimo"
 int controllaSeNumeroPrimo(int numero) {
     for (int i = 2; i < numero; i++) {
         if (numero % i == 0 && i != numero) {
@@ -205,7 +208,6 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     
     // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
     float N, probabilita;
-    float vettoreX[lunghezzaVettoreX], vettoreXFattoriale[lunghezzaVettoreX], vettoreNMenoXFattoriale[lunghezzaVettoreX];
     
     // Acquisizione N
     printf("Inserisci N (compreso tra 10 e 1000): ");
@@ -222,6 +224,9 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
         scanf("%f", &probabilita);
     }
+    
+    // Dichiarazione vettori che raccoglieranno i fattoriali di x e di (N-x)
+    float vettoreX[lunghezzaVettoreX], vettoreXFattoriale[lunghezzaVettoreX], vettoreNMenoXFattoriale[lunghezzaVettoreX];
     
     // Riempimento del vettore che raccoglie le x di numeri casuali
     for (int i = 0; i < lunghezzaVettoreX; i++) {
@@ -242,7 +247,6 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     for (int i = 1; i < N+1; i++) {
         fattorialeN *= i;
     }
-    printf("Fattoriale di N = %f\n", fattorialeN);
     
     // Per ogni elemento del vettoreX...
     for (int p = 0; p < lunghezzaVettoreX; p++) {
@@ -264,6 +268,7 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
             fattorialeNMenoX *= i; // ...Calcola il fattoriale di (N - x)
         }
         
+        //printf("Ok: N = %f, x = %f, n-m = %f, il fattoriale e' %f\n", N, vettoreX[p], nMenoX, fattorialeNMenoX);
         vettoreNMenoXFattoriale[p] = fattorialeNMenoX;
         fattorialeNMenoX = 1;
     }
@@ -271,13 +276,14 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     // Calcola la probabilità di Poisson
     float pPoisson;
     for (int i = 0; i < lunghezzaVettoreX; i++) {
-        pPoisson = (fattorialeN * pow(probabilita, vettoreX[i]))/ (vettoreXFattoriale[i] * vettoreNMenoXFattoriale[i]);
-        printf("La probabilita' di Poisson e' %f con N = %f, x = %f, probabilita = %f.\n", pPoisson, N, vettoreX[i], probabilita);
+        pPoisson = (fattorialeN * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
+                   (vettoreXFattoriale[i] * vettoreNMenoXFattoriale[i]);
+        printf("La probabilita' di Poisson e' %f ed e' stata calcolata con N = %f, fattorialeN = %f, x = %f, probabilita = %f, N-xFattoriale = %f.\n", pPoisson, N, fattorialeN, vettoreX[i], probabilita, vettoreNMenoXFattoriale[i]);
     }
     
     // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
     for (int i = 0; i < lunghezzaVettoreX; i++) {
-        printf("Posizione %d vettore x '%.2f', fattoriale x: '%.2f'\n", i, vettoreX[i], vettoreXFattoriale[i]);
+        printf("Posizione %d vettore x '%f', fattoriale x: '%f'\n", i, vettoreX[i], vettoreXFattoriale[i]);
     }
 }
 
