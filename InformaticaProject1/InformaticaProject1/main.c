@@ -201,89 +201,113 @@ void mergeSort(int *A, int n) {
     Merge(A, L, mid, R, n-mid);  // Unisce i vettori L e R into A as sorted list.
     free(L); // dopo aver creato uno spazio in memoria, ora liberalo con free() - questa funzione libera lo spazio di memoria HEAP
     free(R);
-    puts("Ho ordinato il vettore con successo.");
 }
+
+// Dichiarazione vettori che raccoglieranno i fattoriali di x e di (N-x)
+float vettoreX[1000], vettoreXFattoriale[1000], vettoreNMenoXFattoriale[1000], vettoreProbabilitaCompreseTraIntervallo[1000];
+int p = 0;
 
 void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     
-    // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
-    float N, probabilita;
-    
-    // Acquisizione N
-    printf("Inserisci N (compreso tra 10 e 1000): ");
-    scanf("%f", &N);
-    while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
-        printf("Errore! N deve essere compreso tra 10 e 100. Inserisci N: ");
+    if (opzioneSceltaUtente == 0) {
+        
+        // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
+        float N, probabilita;
+        
+        // Acquisizione N
+        printf("Inserisci N (compreso tra 10 e 1000): ");
         scanf("%f", &N);
-    }
-    
-    // Acquisizione probabilità
-    printf("Inserisci la probabilita': ");
-    scanf("%f", &probabilita);
-    while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
-        printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
+        while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
+            printf("Errore! N deve essere compreso tra 10 e 100. Inserisci N: ");
+            scanf("%f", &N);
+        }
+        
+        // Acquisizione probabilità
+        printf("Inserisci la probabilita': ");
         scanf("%f", &probabilita);
-    }
-    
-    // Dichiarazione vettori che raccoglieranno i fattoriali di x e di (N-x)
-    float vettoreX[lunghezzaVettoreX], vettoreXFattoriale[lunghezzaVettoreX], vettoreNMenoXFattoriale[lunghezzaVettoreX];
-    
-    // Riempimento del vettore che raccoglie le x di numeri casuali
-    for (int i = 0; i < lunghezzaVettoreX; i++) {
-        vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
-    }
-    
-    // La formula necessita di tre variabili: N, p, x:
-    //             x          N-x
-    //       N! * p  * (1 - p)
-    // p  =  ------------------
-    //  x      x! * (N - x)!
-    //
-    
-    // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
-    float fattorialeN = 1, fattorialeX = 1, fattorialeNMenoX = 1;
-    
-    // Calcolo il fattoriale di N
-    for (int i = 1; i < N+1; i++) {
-        fattorialeN *= i;
-    }
-    
-    // Per ogni elemento del vettoreX...
-    for (int p = 0; p < lunghezzaVettoreX; p++) {
-        for (int i = 1; i < vettoreX[p]+1; i++) {
-            fattorialeX *= i; // ...Calcola il fattoriale di x
-        }
-
-        vettoreXFattoriale[p] = fattorialeX;
-        fattorialeX = 1;
-    }
-    
-    // Calcola il fattoriale di (N - x)
-    // Per ogni elemento del vettoreX...
-    for (int p = 0; p < lunghezzaVettoreX; p++) {
-    
-        float nMenoX = N - vettoreX[p];
-        
-        for (int i = 1; i < nMenoX+1; i++) {
-            fattorialeNMenoX *= i; // ...Calcola il fattoriale di (N - x)
+        while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
+            printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
+            scanf("%f", &probabilita);
         }
         
-        //printf("Ok: N = %f, x = %f, n-m = %f, il fattoriale e' %f\n", N, vettoreX[p], nMenoX, fattorialeNMenoX);
-        vettoreNMenoXFattoriale[p] = fattorialeNMenoX;
-        fattorialeNMenoX = 1;
+        // Riempimento del vettore che raccoglie le x di numeri casuali
+        for (int i = 0; i < lunghezzaVettoreX; i++) {
+            vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
+        }
+        
+        // La formula necessita di tre variabili: N, p, x:
+        //             x          N-x
+        //       N! * p  * (1 - p)
+        // p  =  ------------------
+        //  x      x! * (N - x)!
+        //
+        
+        // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
+        float fattorialeN = 1, fattorialeX = 1, fattorialeNMenoX = 1;
+        
+        // Calcolo il fattoriale di N
+        for (int i = 1; i < N+1; i++) {
+            fattorialeN *= i;
+        }
+        
+        // Per ogni elemento del vettoreX...
+        for (int p = 0; p < lunghezzaVettoreX; p++) {
+            for (int i = 1; i < vettoreX[p]+1; i++) {
+                fattorialeX *= i; // ...Calcola il fattoriale di x
+            }
+            
+            vettoreXFattoriale[p] = fattorialeX;
+            fattorialeX = 1;
+        }
+        
+        // Calcola il fattoriale di (N - x)
+        // Per ogni elemento del vettoreX...
+        for (int p = 0; p < lunghezzaVettoreX; p++) {
+            
+            float nMenoX = N - vettoreX[p];
+            
+            for (int i = 1; i < nMenoX+1; i++) {
+                fattorialeNMenoX *= i; // ...Calcola il fattoriale di (N - x)
+            }
+            
+            //printf("Ok: N = %f, x = %f, n-m = %f, il fattoriale e' %f\n", N, vettoreX[p], nMenoX, fattorialeNMenoX);
+            vettoreNMenoXFattoriale[p] = fattorialeNMenoX;
+            fattorialeNMenoX = 1;
+        }
+        
+        // Calcola la probabilità di Poisson
+        float pPoisson;
+        for (int i = 0; i < lunghezzaVettoreX; i++) {
+            pPoisson = (fattorialeN * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
+            (vettoreXFattoriale[i] * vettoreNMenoXFattoriale[i]);
+            //printf("La probabilita' di Poisson e' %f ed e' stata calcolata con N = %f, fattorialeN = %f, x = %f, probabilita = %f, N-xFattoriale = %f.\n", pPoisson, N, fattorialeN, vettoreX[i], probabilita, vettoreNMenoXFattoriale[i]);
+            if ((pPoisson >= 0 && pPoisson <= 31.25) || (pPoisson >= 31.25 && pPoisson <= 187.5) || (pPoisson >= 500 && pPoisson >= 812.5) || (pPoisson >= 968.75 && pPoisson <= 1000)) {
+                pPoisson = vettoreProbabilitaCompreseTraIntervallo[p];
+                p++;
+            }
+        }
+    // Distingui il singolare/plurale: "c'è" e "ci sono", "compresa" e "comprese"
+    if (p == 1) {
+        printf("C'e' %d probabilita' di Poisson compresa tra i valori richiesti.\n", p);
+    } else {
+        printf("Ci sono %d probabilita' di Poisson comprese tra i valori richiesti.\n", p);
     }
     
-    // Calcola la probabilità di Poisson
-    float pPoisson;
-    for (int i = 0; i < lunghezzaVettoreX; i++) {
-        pPoisson = (fattorialeN * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
-                   (vettoreXFattoriale[i] * vettoreNMenoXFattoriale[i]);
-        printf("La probabilita' di Poisson e' %f ed e' stata calcolata con N = %f, fattorialeN = %f, x = %f, probabilita = %f, N-xFattoriale = %f.\n", pPoisson, N, fattorialeN, vettoreX[i], probabilita, vettoreNMenoXFattoriale[i]);
     }
-    
-    // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
-    for (int i = 0; i < lunghezzaVettoreX; i++) {
-        printf("Posizione %d vettore x '%f', fattoriale x: '%f'\n", i, vettoreX[i], vettoreXFattoriale[i]);
+    if (opzioneSceltaUtente == 1) {
+        // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
+        for (int i = 0; i < lunghezzaVettoreX; i++) {
+            printf("Posizione %d vettore x '%f'.\n", i, vettoreX[i]);
+        }
+    } else if (opzioneSceltaUtente == 2) {
+        if (p == 0) {
+            puts("Non ho trovato alcun valore nel vettore delle frequenze di estrazione.");
+        }
+        
+        // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore delle frequenze di estrazione
+        for (int i = 0; i < p; i++) {
+            printf("Posizione %d vettore frequenze estrazione '%f'\n", i, vettoreProbabilitaCompreseTraIntervallo[i]);
+        }
     }
 }
 
@@ -352,6 +376,7 @@ int main() {
                 break;
             case 10:
                 mergeSort(myArray, maxNumero);
+                puts("Ho ordinato il vettore con successo.");
                 break;
             case 11:
                 probabilitaPoisson(maxNumero, 0);
