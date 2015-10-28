@@ -164,7 +164,8 @@ void ricercaLineareSentinella(int array[], int lunghezza) {
 }
 
 // 10. Ordinamento attraverso l'algoritmo del merge sort (Cesare de Cal)
-void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
+// - A è il vettore intero, L e R sono i due vettori da unire
+void merge(int *A, int *L, int leftCount, int *R, int rightCount) {
     int i, j, k;
     
     // i - to mark the index of left aubarray (L)
@@ -172,7 +173,7 @@ void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
     // k - to mark the index of merged subarray (A)
     i = 0; j = 0; k =0;
     
-    while(i<leftCount && j< rightCount) {
+    while(i < leftCount && j < rightCount) {
         if(L[i]  < R[j]) A[k++] = L[i++];
         else A[k++] = R[j++];
     }
@@ -180,12 +181,11 @@ void Merge(int *A, int *L, int leftCount, int *R, int rightCount) {
     while(j < rightCount) A[k++] = R[j++];
 }
 
-// Recursive function to sort an array of integers.
+// Merge sort è un algoritmo di ordinamento che ordina crescentemente un array di interi (Int)
 void mergeSort(int *A, int n) {
     int mid, i, *L, *R;
-    if (n < 2) return; // base condition. If the array has less than two element, do nothing.
-    
-    mid = n / 2;  // find the mid index.
+    if (n < 2) return; // Condizione di base. Se il vettore contiene meno di due elementi, non fare nulla
+    mid = n / 2; // Trova l'indice che si trova nella metà del vettore
     
     // create left and right subarrays
     // mid elements (from index 0 till mid-1) should be part of left sub-array
@@ -198,7 +198,7 @@ void mergeSort(int *A, int n) {
     
     mergeSort(L,mid);  // sorting the left subarray
     mergeSort(R,n-mid);  // sorting the right subarray
-    Merge(A, L, mid, R, n-mid);  // Unisce i vettori L e R into A as sorted list.
+    merge(A, L, mid, R, n-mid);  // Unisce i vettori L e R into A as sorted list.
     free(L); // dopo aver creato uno spazio in memoria, ora liberalo con free() - questa funzione libera lo spazio di memoria HEAP
     free(R);
 }
@@ -376,7 +376,6 @@ int main() {
                 break;
             case 10:
                 mergeSort(myArray, maxNumero);
-                puts("Ho ordinato il vettore con successo.");
                 break;
             case 11:
                 probabilitaPoisson(maxNumero, 0);
