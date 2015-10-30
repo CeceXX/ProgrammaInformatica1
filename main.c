@@ -21,7 +21,6 @@
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
 
-
 // 1. Azzeramento del vettore (Gianluca Tesi)
 // - Ogni elemento del vettore verrà azzerato, uno ad uno
 void azzeramentoElementiVettore(int array[], int lunghezza) {
@@ -39,7 +38,7 @@ void inserimentoElementiVettore(int array[], int lunghezza) {
 }
 
 // 3. Inserimento di un solo dato nella prima posizione contente zero (Gianluca Tesi)
-int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
+int inserimentoSoloUnDatoSeIndiceZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
             printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i+1);
@@ -354,7 +353,7 @@ int main() {
                 inserimentoElementiVettore(myArray, maxNumero);
                 break;
             case 3:
-                inserimentoSoloUnDatoSeZero(myArray, maxNumero);
+                inserimentoSoloUnDatoSeIndiceZero(myArray, maxNumero);
                 break;
             case 4:
                 inserimentoNumeriCasuali(myArray, maxNumero);
@@ -390,6 +389,5 @@ int main() {
                 break;
         }
     }
-    
     return 0;
 }
