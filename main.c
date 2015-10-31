@@ -74,7 +74,7 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
     puts("   n  |   valore  ");
     for (int i = 0; i < lunghezza; i++) {
-        printf("  %2d  |    %3d    \n", i+1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
+        printf("  %3d  |    %3d    \n", i+1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
     }
     puts("-----------------");
 }
@@ -285,13 +285,13 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
                 p++;
             }
         }
-    // Distingui il singolare/plurale: "c'è" e "ci sono", "compresa" e "comprese"
-    if (p == 1) {
-        printf("C'e' %d probabilita' di Poisson compresa tra i valori richiesti.\n", p);
-    } else {
-        printf("Ci sono %d probabilita' di Poisson comprese tra i valori richiesti.\n", p);
-    }
-    
+        // Distingui il singolare/plurale: "c'è" e "ci sono", "compresa" e "comprese"
+        if (p == 1) {
+            printf("C'e' %d probabilita' di Poisson compresa tra i valori richiesti.\n", p);
+        } else {
+            printf("Ci sono %d probabilita' di Poisson comprese tra i valori richiesti.\n", p);
+        }
+        
     }
     if (opzioneSceltaUtente == 1) {
         // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
@@ -318,8 +318,8 @@ int main() {
     scanf("%d", &maxNumero);
     
     // controlla se il numero è maggiore compreso di 1. Non esiste un'array con 0 elementi!
-    while (maxNumero < 1) {
-        printf("Non esiste un vettore con %d elementi. Inserisci un numero maggiore di 0: ", maxNumero);
+    while ((maxNumero < 1) || (maxNumero > 150)) {
+        printf("Non e' possibile creare un vettore di %d elementi. Inserisci un numero maggiore compreso tra 1 e 150: ", maxNumero);
         scanf("%d", &maxNumero);
     }
     
