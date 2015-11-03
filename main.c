@@ -21,6 +21,15 @@
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
 
+float acquisisciValoreCompresoTraValori(int min, int max) {
+    float inserimento;
+    scanf("%f", &inserimento);
+    while ((inserimento < min) || (inserimento > max)) {
+        printf("'%.f' non e' un inserimento valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max); // se l'opzione scelta non è compresa tra 1 e 11, allora non è valida
+        scanf("%f", &inserimento);
+    }
+    return inserimento;
+}
 
 // 1. Azzeramento del vettore (Gianluca Tesi)
 // - Ogni elemento del vettore verrà azzerato, uno ad uno
@@ -207,6 +216,15 @@ void mergeSort(int *A, int n) {
 float vettoreX[1000], vettoreXFattoriale[1000], vettoreNMenoXFattoriale[1000], vettoreProbabilitaCompreseTraIntervallo[1000];
 int p = 0;
 
+// Funzione ricorsiva
+int fattoriale(int n) {
+    if (n < 0) return -1; // Fattoriale non è definito per interi negativi!
+    
+    if (n == 0) return 1;
+    else return n*fattoriale(n-1);
+}
+
+
 void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     
     if (opzioneSceltaUtente == 0) {
@@ -217,54 +235,37 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         // Acquisizione N
         printf("Inserisci N (compreso tra 10 e 1000): ");
         scanf("%f", &N);
-        while ((N < 10) || (N > 1000)) { // assicurati che N sia compreso tra 10 e 1000
-            printf("Errore! N deve essere compreso tra 10 e 100. Inserisci N: ");
-            scanf("%f", &N);
-        }
+        N = acquisisciValoreCompresoTraValori(10, 1000);
         
         // Acquisizione probabilità
         printf("Inserisci la probabilita': ");
         scanf("%f", &probabilita);
-        while ((probabilita < 0) || (probabilita > 1)) { // assicurati che la probabilità sia compresa tra 0 e 1
-            printf("Errore! La probabilita' dev'essere compresa tra 0 e 1. Inserisci la probabilita': ");
-            scanf("%f", &probabilita);
-        }
+        probabilita = acquisisciValoreCompresoTraValori(0, 1);
         
         // Riempimento del vettore che raccoglie le x di numeri casuali
         for (int i = 0; i < lunghezzaVettoreX; i++) {
             vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
         }
         
-        // La formula necessita di tre variabili: N, p, x:
-        //             x          N-x
-        //       N! * p  * (1 - p)
-        // p  =  ------------------
-        //  x      x! * (N - x)!
-        //
+        /* La formula necessita di tre variabili: N, p, x:
+         x          N-x
+         N! * p  * (1 - p)
+         p  =  ------------------
+         x      x! * (N - x)!
+         */
         
         // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
-        float fattorialeN = 1, fattorialeX = 1, fattorialeNMenoX = 1;
+        long unsigned int fattorialeN = fattoriale(N), fattorialeNMenoX = 1;
         
-        // Calcolo il fattoriale di N
-        for (int i = 1; i < N+1; i++) {
-            fattorialeN *= i;
-        }
-        
-        // Per ogni elemento del vettoreX...
-        for (int p = 0; p < lunghezzaVettoreX; p++) {
-            for (int i = 1; i < vettoreX[p]+1; i++) {
-                fattorialeX *= i; // ...Calcola il fattoriale di x
-            }
-            
-            vettoreXFattoriale[p] = fattorialeX;
-            fattorialeX = 1;
+        for (int i = 0; i < lunghezzaVettoreX; i++) {
+            vettoreXFattoriale[i] = fattoriale(vettoreX[i]);
         }
         
         // Calcola il fattoriale di (N - x)
         // Per ogni elemento del vettoreX...
         for (int p = 0; p < lunghezzaVettoreX; p++) {
             
-            float nMenoX = N - vettoreX[p];
+            int nMenoX = N - vettoreX[p];
             
             for (int i = 1; i < nMenoX+1; i++) {
                 fattorialeNMenoX *= i; // ...Calcola il fattoriale di (N - x)
@@ -286,13 +287,13 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
                 p++;
             }
         }
-    // Distingui il singolare/plurale: "c'è" e "ci sono", "compresa" e "comprese"
-    if (p == 1) {
-        printf("C'e' %d probabilita' di Poisson compresa tra i valori richiesti.\n", p);
-    } else {
-        printf("Ci sono %d probabilita' di Poisson comprese tra i valori richiesti.\n", p);
-    }
-    
+        // Distingui il singolare/plurale: "c'è" e "ci sono", "compresa" e "comprese"
+        if (p == 1) {
+            printf("C'e' %d probabilita' di Poisson compresa tra i valori richiesti.\n", p);
+        } else {
+            printf("Ci sono %d probabilita' di Poisson comprese tra i valori richiesti.\n", p);
+        }
+        
     }
     if (opzioneSceltaUtente == 1) {
         // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
@@ -313,18 +314,12 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
 
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
 int main() {
-    int myArray[150], maxNumero, inserimento; // come richiesta: "L'array verra dichiarato con una dimensione di 150 elementi"...
+    int myArray[150], maxNumero, inserimento; // come richiesta: "L'array verra dichiarato con una dimensione di 150 elementi"
     
     printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: "); // "ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare"
-    scanf("%d", &maxNumero);
+    maxNumero = acquisisciValoreCompresoTraValori(10, 150);
     
-    // controlla se il numero è maggiore compreso di 1. Non esiste un'array con 0 elementi!
-    while (maxNumero < 1) {
-        printf("Non esiste un vettore con %d elementi. Inserisci un numero maggiore di 0: ", maxNumero);
-        scanf("%d", &maxNumero);
-    }
-    
-    while (1) { // while (1) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato VERO
+    while (1) { // while (condizione) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato condizione VERA
         puts("-------------------------------------------------------------------------------------------------------");
         puts("|  1  |  Azzeramento del vettore                                                                      |");
         puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
@@ -340,11 +335,7 @@ int main() {
         puts("-------------------------------------------------------------------------------------------------------");
         
         printf("Scegli un'opzione del menu: ");
-        scanf("%d", &inserimento);
-        while ((inserimento < 1) || (inserimento > 13)) {
-            printf("'%d' non e' un'opzione valida. Inserisci un'opzione compresa tra 1 e 10: ", inserimento); // se l'opzione scelta non è compresa tra 1 e 11, allora non è valida
-            scanf("%d", &inserimento);
-        }
+        inserimento = acquisisciValoreCompresoTraValori(1, 13);
         
         switch (inserimento) {
             case 1:
