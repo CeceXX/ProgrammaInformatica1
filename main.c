@@ -304,12 +304,13 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
 
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
 int main() {
-    int myArray[150], maxNumero, inserimento; // come richiesta: "L'array verra dichiarato con una dimensione di 150 elementi"
+    int vettore[150];
     
-    printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: "); // "ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare"
-    maxNumero = acquisisciValoreCompresoTraValori(10, 150);
+    printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
+    int lunghezzaVettoreMassima = acquisisciValoreCompresoTraValori(10, 150);
     
-    while (1) { // while (condizione) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato condizione VERA
+    // while (condizione) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato VERO
+    while (1) {
         puts("-------------------------------------------------------------------------------------------------------");
         puts("|  1  |  Azzeramento del vettore                                                                      |");
         puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
@@ -325,47 +326,47 @@ int main() {
         puts("-------------------------------------------------------------------------------------------------------");
         
         printf("Scegli un'opzione del menu: ");
-        inserimento = acquisisciValoreCompresoTraValori(1, 13);
+        int inserimento = acquisisciValoreCompresoTraValori(1, 13);
         
         switch (inserimento) {
             case 1:
-                azzeramentoElementiVettore(myArray, maxNumero);
+                azzeramentoElementiVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 2:
-                inserimentoElementiVettore(myArray, maxNumero);
+                inserimentoElementiVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 3:
-                inserimentoSoloUnDatoSeZero(myArray, maxNumero);
+                inserimentoSoloUnDatoSeZero(vettore, lunghezzaVettoreMassima);
                 break;
             case 4:
-                inserimentoNumeriCasuali(myArray, maxNumero);
+                inserimentoNumeriCasuali(vettore, lunghezzaVettoreMassima);
                 break;
             case 5:
-                visualizzazioneElementiVettore(myArray, maxNumero);
+                visualizzazioneElementiVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 6:
-                serieGeometrica(myArray, maxNumero);
+                serieGeometrica(vettore, lunghezzaVettoreMassima);
                 break;
             case 7:
-                prodottoNumeriIndicePrimo(myArray, maxNumero);
+                prodottoNumeriIndicePrimo(vettore, lunghezzaVettoreMassima);
                 break;
             case 8:
-                sommaRestoDivisioneNumeriPari(myArray, maxNumero);
+                sommaRestoDivisioneNumeriPari(vettore, lunghezzaVettoreMassima);
                 break;
             case 9:
-                ricercaLineareSentinella(myArray, maxNumero);
+                ricercaLineareSentinella(vettore, lunghezzaVettoreMassima);
                 break;
             case 10:
-                mergeSort(myArray, maxNumero);
+                mergeSort(vettore, lunghezzaVettoreMassima);
                 break;
             case 11:
-                probabilitaPoisson(maxNumero, 0);
+                probabilitaPoisson(lunghezzaVettoreMassima, 0);
                 break;
             case 12:
-                probabilitaPoisson(maxNumero, 1);
+                probabilitaPoisson(lunghezzaVettoreMassima, 1);
                 break;
             case 13:
-                probabilitaPoisson(maxNumero, 2);
+                probabilitaPoisson(lunghezzaVettoreMassima, 2);
                 break;
             default:
                 break;
