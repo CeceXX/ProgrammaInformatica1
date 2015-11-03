@@ -25,7 +25,7 @@ float acquisisciValoreCompresoTraValori(int min, int max) {
     float inserimento;
     scanf("%f", &inserimento);
     while ((inserimento < min) || (inserimento > max)) {
-        printf("'%.f' non e' un inserimento valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max); // se l'opzione scelta non è compresa tra 1 e 11, allora non è valida
+        printf("'%.f' non e' un inserimento valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max);
         scanf("%f", &inserimento);
     }
     return inserimento;
@@ -61,22 +61,16 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
 }
 
 // 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento (Gianluca Tesi)
-int numeroRandomInt(int min, int max) {
-    int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
-    return (int) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
-}
-
-int numeroRandomFloat(float min, float max) {
+int generaNumeroCasualeCompresoTraValori(float min, float max) {
     int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
     return (float) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
 }
 
 void inserimentoNumeriCasuali(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        int r = numeroRandomInt(200, 300); // passa alla funzione 'numeroRandom' il numero 'min' e quello 'max' su cui operare
+        int r = generaNumeroCasualeCompresoTraValori(200, 300);
         array[i] = r; // poi assegna a ciasuno elemento il valore casuale generato
     }
-    puts("");
 }
 
 // 5. La visualizzazione di tutti i dati presenti nel vettore (Paolo Valeri)
@@ -228,11 +222,8 @@ int fattoriale(int n) {
 void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     
     if (opzioneSceltaUtente == 0) {
-        
-        // Dichiarazione e acquisizione variabili N (compreso tra 10 e 100) probabilità (tra 0 e 1)
         float N, probabilita;
         
-        // Acquisizione N
         printf("Inserisci N (compreso tra 10 e 1000): ");
         scanf("%f", &N);
         N = acquisisciValoreCompresoTraValori(10, 1000);
@@ -242,9 +233,8 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         scanf("%f", &probabilita);
         probabilita = acquisisciValoreCompresoTraValori(0, 1);
         
-        // Riempimento del vettore che raccoglie le x di numeri casuali
         for (int i = 0; i < lunghezzaVettoreX; i++) {
-            vettoreX[i] = numeroRandomFloat(0, N); // ogni elemento di X è un numero CASUALE compreso tra 0 ed N
+            vettoreX[i] = generaNumeroCasualeCompresoTraValori(0, N);
         }
         
         /* La formula necessita di tre variabili: N, p, x:
