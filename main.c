@@ -40,7 +40,7 @@ void azzeramentoElementiVettore(int array[], int lunghezza) {
 }
 
 // 2. Inserimento di tutti i dati da tastiera (Elis Belletta)
-void inserimentoElementiVettore(int array[], int lunghezza) {
+void inserimentoElementiVettoreDaTastiera(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         printf("Inserisci l'elemento per la positione %d: ", i+1);
         scanf("%d", &array[i]); // acquisisci un numero da tastiera da inserire nel vettore
@@ -85,27 +85,24 @@ void visualizzazioneElementiVettore(int array[], int lunghezza) {
 
 // 6. L'inserimento dei numeri della serie geometrica (Elis Belletta)
 // - Maggiori informazioni su come funziona la serie geometrica: https://www.youtube.com/watch?v=mcnblnEsf98
-// - È necessario trovare i termini della serie geometrica date r e p
-void serieGeometrica(int array[], int lunghezza) {
-    int r, p, somma; // r è la costante della serie geometrica, p è il primo termine della serie geometrica
-    char inserimento[2];
-    printf("Desideri usare il primo elemento del vettore come primo termine della serie geometrica, oppure un altro termine? Y/N: ");
-    scanf("%1s", inserimento);
-    if ((inserimento[0] == 'y') || (inserimento[0] == 'Y')) { // l'utente ha la possibilità di scegliere se usare il primo elemento dell'array come primo termine della serie geometrica
-        p = array[0];
-    } else {
+void insermentoSerieGeometricaVettore(int array[], int lunghezza) {
+    int costante, primoTermine;
+    
+    printf("Inserisci 1 se desideri usare il primo elemento del vettore (ovvero '%d') come primo termine della serie geometrica, oppure 2 se vuoi usare un altro numero: ", array[0]);
+    int inserimento = acquisisciValoreCompresoTraValori(1, 2);
+    
+    if (inserimento == 1) {
+        primoTermine = array[0];
+    } else if (inserimento == 2) {
         printf("Inserisci il primo numero della serie geometrica: ");
-        scanf("%d", &p);
-    }
-    printf("Inserisci r: ");
-    scanf("%d", &r);
-    for (int i = 0; i < lunghezza; i++) {
-        array[i] = p * pow(r, i);   // inserisco tutti i termini della serie geometrica nel vettore
+        scanf("%d", &primoTermine);
     }
     
-    // La somma dei termini della serie geometrica non è richiesta, ma è un'aggiunta utile
-    somma = (p * (pow(r, lunghezza) - 1))/ (r - 1);
-    printf("Ho inserito i termini della serie geometrica nel vettore. La somma della serie geometrica equivale a %d.\n", somma);
+    printf("Inserisci la costante della serie geometrica: ");
+    scanf("%d", &costante);
+    for (int i = 0; i < lunghezza; i++) {
+        array[i] = primoTermine * pow(costante, i);
+    }
 }
 
 // 7. Il prodotto dei numeri di indice primo (Elis Belletta)
@@ -333,7 +330,7 @@ int main() {
                 azzeramentoElementiVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 2:
-                inserimentoElementiVettore(vettore, lunghezzaVettoreMassima);
+                inserimentoElementiVettoreDaTastiera(vettore, lunghezzaVettoreMassima);
                 break;
             case 3:
                 inserimentoSoloUnDatoSeZero(vettore, lunghezzaVettoreMassima);
@@ -345,7 +342,7 @@ int main() {
                 visualizzazioneElementiVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 6:
-                serieGeometrica(vettore, lunghezzaVettoreMassima);
+                insermentoSerieGeometricaVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 7:
                 prodottoNumeriIndicePrimo(vettore, lunghezzaVettoreMassima);
