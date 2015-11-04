@@ -32,7 +32,6 @@ float acquisisciValoreCompresoTraValori(int min, int max) {
 }
 
 // 1. Azzeramento del vettore (Gianluca Tesi)
-// - Ogni elemento del vettore verrà azzerato, uno ad uno
 void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         array[i] = 0;
@@ -40,10 +39,10 @@ void azzeramentoElementiVettore(int array[], int lunghezza) {
 }
 
 // 2. Inserimento di tutti i dati da tastiera (Elis Belletta)
-void inserimentoElementiVettoreDaTastiera(int array[], int lunghezza) {
+void inserimentoElementiDaTastieraVettore(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         printf("Inserisci l'elemento per la positione %d: ", i+1);
-        scanf("%d", &array[i]); // acquisisci un numero da tastiera da inserire nel vettore
+        scanf("%d", &array[i]);
     }
 }
 
@@ -52,15 +51,15 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
             printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i+1);
-            scanf("%d", &array[i]); // acquisici un numero da tastiera
-            return 0; // appena trova 0, si esce dalla funzione con 'return' perchè non la funzione non ci serve più
+            scanf("%d", &array[i]);
+            return 0; // appena trova 0, si esce subito dalla funzione con 'return' perchè non la funzione non ci serve più
         }
     }
     puts("Non ho trovato alcun elemento contenente 0.");
     return 1; // restituisci il val1ore 1 con 'return', ovvero la funzione non ha trovato alcun elemento uguale a zero
 }
 
-// 4. inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento (Gianluca Tesi)
+// 4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento (Gianluca Tesi)
 int generaNumeroCasualeCompresoTraValori(float min, float max) {
     int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
     return (float) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
@@ -330,7 +329,7 @@ int main() {
                 azzeramentoElementiVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 2:
-                inserimentoElementiVettoreDaTastiera(vettore, lunghezzaVettoreMassima);
+                inserimentoElementiDaTastieraVettore(vettore, lunghezzaVettoreMassima);
                 break;
             case 3:
                 inserimentoSoloUnDatoSeZero(vettore, lunghezzaVettoreMassima);
