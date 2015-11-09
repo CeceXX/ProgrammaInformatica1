@@ -21,13 +21,14 @@
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
 
-float acquisisciValoreCompresoTraValori(int min, int max) {
+float acquisisciNumeroCompresoTraValori(int min, int max) {
     float inserimento;
     scanf("%f", &inserimento);
     while ((inserimento < min) || (inserimento > max)) {
         printf("'%.f' non e' un inserimento valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max);
         scanf("%f", &inserimento);
     }
+    
     return inserimento;
 }
 
@@ -88,7 +89,7 @@ void insermentoSerieGeometricaVettore(int array[], int lunghezza) {
     int costante, primoTermine;
     
     printf("Inserisci 1 se desideri usare il primo elemento del vettore (ovvero '%d') come primo termine della serie geometrica, oppure 2 se vuoi usare un altro numero: ", array[0]);
-    int inserimento = acquisisciValoreCompresoTraValori(1, 2);
+    int inserimento = acquisisciNumeroCompresoTraValori(1, 2);
     
     if (inserimento == 1) {
         primoTermine = array[0];
@@ -222,12 +223,12 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         
         printf("Inserisci N (compreso tra 10 e 1000): ");
         scanf("%f", &N);
-        N = acquisisciValoreCompresoTraValori(10, 1000);
+        N = acquisisciNumeroCompresoTraValori(10, 1000);
         
         // Acquisizione probabilità
         printf("Inserisci la probabilita': ");
         scanf("%f", &probabilita);
-        probabilita = acquisisciValoreCompresoTraValori(0, 1);
+        probabilita = acquisisciNumeroCompresoTraValori(0, 1);
         
         for (int i = 0; i < lunghezzaVettoreX; i++) {
             vettoreX[i] = generaNumeroCasualeCompresoTraValori(0, N);
@@ -303,7 +304,7 @@ int main() {
     int vettore[150];
     
     printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
-    int lunghezzaVettoreMassima = acquisisciValoreCompresoTraValori(10, 150);
+    int lunghezzaVettoreMassima = acquisisciNumeroCompresoTraValori(10, 150);
     
     // while (condizione) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato VERO
     while (1) {
@@ -322,7 +323,7 @@ int main() {
         puts("-------------------------------------------------------------------------------------------------------");
         
         printf("Scegli un'opzione del menu: ");
-        int inserimento = acquisisciValoreCompresoTraValori(1, 13);
+        int inserimento = acquisisciNumeroCompresoTraValori(1, 13);
         
         switch (inserimento) {
             case 1:
