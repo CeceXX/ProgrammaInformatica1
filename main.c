@@ -25,7 +25,7 @@ float acquisisciNumeroCompresoTraValori(int min, int max) {
     float inserimento;
     scanf("%f", &inserimento);
     while ((inserimento < min) || (inserimento > max)) {
-        printf("'%.f' non e' un inserimento valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max);
+        printf("'%.f' non e' un numero valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max);
         scanf("%f", &inserimento);
     }
     
@@ -68,8 +68,7 @@ int generaNumeroCasualeCompresoTraValori(float min, float max) {
 
 void inserimentoNumeriCasuali(int array[], int lunghezza) {
     for (int i = 0; i < lunghezza; i++) {
-        int r = generaNumeroCasualeCompresoTraValori(200, 300);
-        array[i] = r; // poi assegna a ciasuno elemento il valore casuale generato
+        array[i] = generaNumeroCasualeCompresoTraValori(200, 300);
     }
 }
 
