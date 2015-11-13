@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
+#include <time.h>
 
 float acquisisciNumeroCompresoTraValori(int min, int max) {
     float inserimento;
@@ -28,7 +29,6 @@ float acquisisciNumeroCompresoTraValori(int min, int max) {
         printf("'%.f' non e' un numero valido. Inserisci un valore compreso tra %d e %d: ", inserimento, min, max);
         scanf("%f", &inserimento);
     }
-    
     return inserimento;
 }
 
@@ -61,9 +61,8 @@ int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
 }
 
 // 4. Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento (Gianluca Tesi)
-int generaNumeroCasualeCompresoTraValori(float min, float max) {
-    int differenza = max - min; // dato una fascia di valori definita da 'min' e 'max'...
-    return (float) (((double)(differenza+1) / RAND_MAX) * rand() + min); // ...genera un numero random con RAND_MAX
+int generaNumeroCasualeCompresoTraValori(int min, int max) {
+    return rand() % (max-min) + min;
 }
 
 void inserimentoNumeriCasuali(int array[], int lunghezza) {
