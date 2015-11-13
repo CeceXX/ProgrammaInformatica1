@@ -301,7 +301,7 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
 
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
 int main() {
-    int vettore[150];
+    int numeri[150];
     
     printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
     int lunghezzaVettoreMassima = acquisisciNumeroCompresoTraValori(10, 150);
@@ -327,34 +327,34 @@ int main() {
         
         switch (inserimento) {
             case 1:
-                azzeramentoElementiVettore(vettore, lunghezzaVettoreMassima);
+                azzeramentoElementiVettore(numeri, lunghezzaVettoreMassima);
                 break;
             case 2:
-                inserimentoElementiDaTastieraVettore(vettore, lunghezzaVettoreMassima);
+                inserimentoElementiDaTastieraVettore(numeri, lunghezzaVettoreMassima);
                 break;
             case 3:
-                inserimentoSoloUnDatoSeZero(vettore, lunghezzaVettoreMassima);
+                inserimentoSoloUnDatoSeZero(numeri, lunghezzaVettoreMassima);
                 break;
             case 4:
-                inserimentoNumeriCasuali(vettore, lunghezzaVettoreMassima);
+                inserimentoNumeriCasuali(numeri, lunghezzaVettoreMassima);
                 break;
             case 5:
-                visualizzazioneElementiVettore(vettore, lunghezzaVettoreMassima);
+                visualizzazioneElementiVettore(numeri, lunghezzaVettoreMassima);
                 break;
             case 6:
-                insermentoSerieGeometricaVettore(vettore, lunghezzaVettoreMassima);
+                insermentoSerieGeometricaVettore(numeri, lunghezzaVettoreMassima);
                 break;
             case 7:
-                prodottoNumeriIndicePrimo(vettore, lunghezzaVettoreMassima);
+                prodottoNumeriIndicePrimo(numeri, lunghezzaVettoreMassima);
                 break;
             case 8:
-                sommaRestoDivisioneNumeriPari(vettore, lunghezzaVettoreMassima);
+                sommaRestoDivisioneNumeriPari(numeri, lunghezzaVettoreMassima);
                 break;
             case 9:
-                ricercaLineareSentinella(vettore, lunghezzaVettoreMassima);
+                ricercaLineareSentinella(numeri, lunghezzaVettoreMassima);
                 break;
             case 10:
-                mergeSort(vettore, lunghezzaVettoreMassima);
+                mergeSort(numeri, lunghezzaVettoreMassima);
                 break;
             case 11:
                 probabilitaPoisson(lunghezzaVettoreMassima, 0);
