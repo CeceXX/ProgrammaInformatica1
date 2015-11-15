@@ -34,14 +34,16 @@ float acquisisciNumeroCompresoTraValori(int min, int max) {
 
 // 1. Azzeramento del vettore (Gianluca Tesi)
 void azzeramentoElementiVettore(int array[], int lunghezza) {
-    for (int i = 0; i < lunghezza; i++) {
+    int i;
+    for (i = 0; i < lunghezza; i++) {
         array[i] = 0;
     }
 }
 
 // 2. Inserimento di tutti i dati da tastiera (Elis Belletta)
 void inserimentoElementiDaTastieraVettore(int array[], int lunghezza) {
-    for (int i = 0; i < lunghezza; i++) {
+    int i;
+    for (i = 0; i < lunghezza; i++) {
         printf("Inserisci l'elemento per la positione %d: ", i+1);
         scanf("%d", &array[i]);
     }
@@ -49,7 +51,8 @@ void inserimentoElementiDaTastieraVettore(int array[], int lunghezza) {
 
 // 3. Inserimento di un solo dato nella prima posizione contente zero (Gianluca Tesi)
 int inserimentoSoloUnDatoSeZero(int array[], int lunghezza) {
-    for (int i = 0; i < lunghezza; i++) {
+    int i;
+    for (i = 0; i < lunghezza; i++) {
         if (array[i] == 0) {
             printf("Ho trovato 0! Inserisci l'elemento per la posizione %d: ", i+1);
             scanf("%d", &array[i]);
@@ -66,7 +69,8 @@ int generaNumeroCasualeCompresoTraValori(int min, int max) {
 }
 
 void inserimentoNumeriCasuali(int array[], int lunghezza) {
-    for (int i = 0; i < lunghezza; i++) {
+    int i;
+    for (i = 0; i < lunghezza; i++) {
         array[i] = generaNumeroCasualeCompresoTraValori(200, 300);
     }
 }
@@ -75,7 +79,8 @@ void inserimentoNumeriCasuali(int array[], int lunghezza) {
 void visualizzazioneElementiVettore(int array[], int lunghezza) {
     puts("-----------------"); // puts() e' simile a printf(), ma va a capo in automatico, non necessita '\n'
     puts("   n  |   valore  ");
-    for (int i = 0; i < lunghezza; i++) {
+    int i;
+    for (i = 0; i < lunghezza; i++) {
         printf("  %2d  |    %3d    \n", i+1, array[i]); // stampa i numeri contenuti nel vettore, uno ad uno
     }
     puts("-----------------");
@@ -98,7 +103,8 @@ void insermentoSerieGeometricaVettore(int array[], int lunghezza) {
     
     printf("Inserisci la costante della serie geometrica: ");
     scanf("%d", &costante);
-    for (int i = 0; i < lunghezza; i++) {
+    int i;
+    for (i = 0; i < lunghezza; i++) {
         array[i] = primoTermine * pow(costante, i);
     }
 }
@@ -106,7 +112,8 @@ void insermentoSerieGeometricaVettore(int array[], int lunghezza) {
 // 7. Il prodotto dei numeri di indice primo (Elis Belletta)
 // - Ho usato due funzioni per questo esercizio, "controllaSeNumeroPrimo" e "prodottoNumeriIndicePrimo"
 int controllaSeNumeroPrimo(int numero) {
-    for (int i = 2; i < numero; i++) {
+    int i;
+    for (i = 2; i < numero; i++) {
         if (numero % i == 0 && i != numero) {
             return 0;
         }
@@ -115,8 +122,8 @@ int controllaSeNumeroPrimo(int numero) {
 }
 
 void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
-    int prodotto = 1;
-    for (int i = 0; i < lunghezza; i++) {
+    int prodotto = 1, i;
+    for (i = 0; i < lunghezza; i++) {
         if (controllaSeNumeroPrimo(i)) {
             prodotto *= array[i];
         }
@@ -126,8 +133,8 @@ void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
 
 // 8. La somma dei resti della divisione per tre dei numeri pari (Elis Belletta)
 void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
-    int somma = 0;
-    for (int i = 0; i < lunghezza; i++) {
+    int somma = 0, i;
+    for (i = 0; i < lunghezza; i++) {
         
         // if (condizione) {...}
         // il codice all'interno dell'if viene eseguito solo se la (condizione) è VERA
@@ -220,15 +227,13 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         float N, probabilita;
         
         printf("Inserisci N (compreso tra 10 e 1000): ");
-        scanf("%f", &N);
         N = acquisisciNumeroCompresoTraValori(10, 1000);
         
-        // Acquisizione probabilità
         printf("Inserisci la probabilita': ");
-        scanf("%f", &probabilita);
         probabilita = acquisisciNumeroCompresoTraValori(0, 1);
         
-        for (int i = 0; i < lunghezzaVettoreX; i++) {
+        int i;
+        for (i = 0; i < lunghezzaVettoreX; i++) {
             vettoreX[i] = generaNumeroCasualeCompresoTraValori(0, N);
         }
         
@@ -239,10 +244,9 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
          x      x! * (N - x)!
          */
         
-        // Fattoriale di un numero, cioè il numero moltiplicato per tutti i numeri precedenti a esso. Ad esempio: 5! = 1 * 2 * 3 * 4 * 5
         long unsigned int fattorialeN = fattoriale(N), fattorialeNMenoX = 1;
         
-        for (int i = 0; i < lunghezzaVettoreX; i++) {
+        for (i = 0; i < lunghezzaVettoreX; i++) {
             vettoreXFattoriale[i] = fattoriale(vettoreX[i]);
         }
         
@@ -252,7 +256,8 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
             
             int nMenoX = N - vettoreX[p];
             
-            for (int i = 1; i < nMenoX+1; i++) {
+            int i;
+            for (i = 1; i < nMenoX+1; i++) {
                 fattorialeNMenoX *= i; // ...Calcola il fattoriale di (N - x)
             }
             
@@ -262,11 +267,9 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         }
         
         // Calcola la probabilità di Poisson
-        float pPoisson;
-        for (int i = 0; i < lunghezzaVettoreX; i++) {
-            pPoisson = (fattorialeN * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
+        for (i = 0; i < lunghezzaVettoreX; i++) {
+            float pPoisson = (fattorialeN * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
             (vettoreXFattoriale[i] * vettoreNMenoXFattoriale[i]);
-            //printf("La probabilita' di Poisson e' %f ed e' stata calcolata con N = %f, fattorialeN = %f, x = %f, probabilita = %f, N-xFattoriale = %f.\n", pPoisson, N, fattorialeN, vettoreX[i], probabilita, vettoreNMenoXFattoriale[i]);
             if ((pPoisson >= 0 && pPoisson <= 31.25) || (pPoisson >= 31.25 && pPoisson <= 187.5) || (pPoisson >= 500 && pPoisson >= 812.5) || (pPoisson >= 968.75 && pPoisson <= 1000)) {
                 pPoisson = vettoreProbabilitaCompreseTraIntervallo[p];
                 p++;
@@ -282,7 +285,8 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     }
     if (opzioneSceltaUtente == 1) {
         // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore x
-        for (int i = 0; i < lunghezzaVettoreX; i++) {
+        int i;
+        for (i = 0; i < lunghezzaVettoreX; i++) {
             printf("Posizione %d vettore x '%f'.\n", i, vettoreX[i]);
         }
     } else if (opzioneSceltaUtente == 2) {
@@ -291,7 +295,8 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         }
         
         // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore delle frequenze di estrazione
-        for (int i = 0; i < p; i++) {
+        int i;
+        for (i = 0; i < p; i++) {
             printf("Posizione %d vettore frequenze estrazione '%f'\n", i, vettoreProbabilitaCompreseTraIntervallo[i]);
         }
     }
