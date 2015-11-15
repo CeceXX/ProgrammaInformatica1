@@ -297,75 +297,78 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
     }
 }
 
+void mostraMenu(int vettore[], int lunghezzaVettore) {
+    puts("-------------------------------------------------------------------------------------------------------");
+    puts("|  1  |  Azzeramento del vettore                                                                      |");
+    puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
+    puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
+    puts("|  4  |  Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento   |");
+    puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore                                   |");
+    puts("|  6  |  Inserimento dei numeri della serie geomtrica                                                 |");
+    puts("|  7  |  Prodotto dei numeri di indice primo                                                          |");
+    puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
+    puts("|  9  |  Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
+    puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
+    puts("|  11 |  Probabilita' di Poisson (12 per visualizzare vettore delle x, 13 per vettore frequenze       |");
+    puts("-------------------------------------------------------------------------------------------------------");
+    
+    printf("Scegli un'opzione del menu: ");
+    int scelta = acquisisciNumeroCompresoTraValori(1, 13);
+    
+    switch (scelta) {
+        case 1:
+            azzeramentoElementiVettore(vettore, lunghezzaVettore);
+            break;
+        case 2:
+            inserimentoElementiDaTastieraVettore(vettore, lunghezzaVettore);
+            break;
+        case 3:
+            inserimentoSoloUnDatoSeZero(vettore, lunghezzaVettore);
+            break;
+        case 4:
+            inserimentoNumeriCasuali(vettore, lunghezzaVettore);
+            break;
+        case 5:
+            visualizzazioneElementiVettore(vettore, lunghezzaVettore);
+            break;
+        case 6:
+            insermentoSerieGeometricaVettore(vettore, lunghezzaVettore);
+            break;
+        case 7:
+            prodottoNumeriIndicePrimo(vettore, lunghezzaVettore);
+            break;
+        case 8:
+            sommaRestoDivisioneNumeriPari(vettore, lunghezzaVettore);
+            break;
+        case 9:
+            ricercaLineareSentinella(vettore, lunghezzaVettore);
+            break;
+        case 10:
+            mergeSort(vettore, lunghezzaVettore);
+            break;
+        case 11:
+            probabilitaPoisson(lunghezzaVettore, 0);
+            break;
+        case 12:
+            probabilitaPoisson(lunghezzaVettore, 1);
+            break;
+        case 13:
+            probabilitaPoisson(lunghezzaVettore, 2);
+            break;
+        default:
+            break;
+    }
+}
+
 // Il compilatore inzia a compilare il codice dalla funzione main() (Paolo Valeri)
 int main() {
     int numeri[150];
     
     printf("Inserisci il numero massimo di numeri che vuoi che il vettore contenga: ");
-    int lunghezzaVettoreMassima = acquisisciNumeroCompresoTraValori(10, 150);
+    int lunghezzaVettore = acquisisciNumeroCompresoTraValori(10, 150);
     
-    // while (condizione) {...} eseguirà il codice all'infinito perchè '1' (come qualsiasi numero DIVERSO DA 0) è considerato VERO
     while (1) {
-        puts("-------------------------------------------------------------------------------------------------------");
-        puts("|  1  |  Azzeramento del vettore                                                                      |");
-        puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
-        puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
-        puts("|  4  |  Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento   |");
-        puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore                                   |");
-        puts("|  6  |  Inserimento dei numeri della serie geomtrica                                                 |");
-        puts("|  7  |  Prodotto dei numeri di indice primo                                                          |");
-        puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
-        puts("|  9  |  Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
-        puts("|  10 |  Ordinamento attraverso l'algoritmo del merge sort                                            |");
-        puts("|  11 |  Probabilita' di Poisson (12 per visualizzare vettore delle x, 13 per vettore frequenze       |");
-        puts("-------------------------------------------------------------------------------------------------------");
-        
-        printf("Scegli un'opzione del menu: ");
-        int inserimento = acquisisciNumeroCompresoTraValori(1, 13);
-        
-        switch (inserimento) {
-            case 1:
-                azzeramentoElementiVettore(numeri, lunghezzaVettoreMassima);
-                break;
-            case 2:
-                inserimentoElementiDaTastieraVettore(numeri, lunghezzaVettoreMassima);
-                break;
-            case 3:
-                inserimentoSoloUnDatoSeZero(numeri, lunghezzaVettoreMassima);
-                break;
-            case 4:
-                inserimentoNumeriCasuali(numeri, lunghezzaVettoreMassima);
-                break;
-            case 5:
-                visualizzazioneElementiVettore(numeri, lunghezzaVettoreMassima);
-                break;
-            case 6:
-                insermentoSerieGeometricaVettore(numeri, lunghezzaVettoreMassima);
-                break;
-            case 7:
-                prodottoNumeriIndicePrimo(numeri, lunghezzaVettoreMassima);
-                break;
-            case 8:
-                sommaRestoDivisioneNumeriPari(numeri, lunghezzaVettoreMassima);
-                break;
-            case 9:
-                ricercaLineareSentinella(numeri, lunghezzaVettoreMassima);
-                break;
-            case 10:
-                mergeSort(numeri, lunghezzaVettoreMassima);
-                break;
-            case 11:
-                probabilitaPoisson(lunghezzaVettoreMassima, 0);
-                break;
-            case 12:
-                probabilitaPoisson(lunghezzaVettoreMassima, 1);
-                break;
-            case 13:
-                probabilitaPoisson(lunghezzaVettoreMassima, 2);
-                break;
-            default:
-                break;
-        }
+        mostraMenu(numeri, lunghezzaVettore);
     }
     
     return 0;
