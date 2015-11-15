@@ -222,15 +222,12 @@ int fattoriale(int n) {
 
 
 void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
-    
     if (opzioneSceltaUtente == 0) {
-        float N, probabilita;
-        
         printf("Inserisci N (compreso tra 10 e 1000): ");
-        N = acquisisciNumeroCompresoTraValori(10, 1000);
+        float N = acquisisciNumeroCompresoTraValori(10, 1000);
         
         printf("Inserisci la probabilita': ");
-        probabilita = acquisisciNumeroCompresoTraValori(0, 1);
+        float probabilita = acquisisciNumeroCompresoTraValori(0, 1);
         
         int i;
         for (i = 0; i < lunghezzaVettoreX; i++) {
@@ -244,31 +241,8 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
          x      x! * (N - x)!
          */
         
-        long unsigned int fattorialeN = fattoriale(N), fattorialeNMenoX = 1;
-        
         for (i = 0; i < lunghezzaVettoreX; i++) {
-            vettoreXFattoriale[i] = fattoriale(vettoreX[i]);
-        }
-        
-        // Calcola il fattoriale di (N - x)
-        // Per ogni elemento del vettoreX...
-        for (int p = 0; p < lunghezzaVettoreX; p++) {
-            
-            int nMenoX = N - vettoreX[p];
-            
-            int i;
-            for (i = 1; i < nMenoX+1; i++) {
-                fattorialeNMenoX *= i; // ...Calcola il fattoriale di (N - x)
-            }
-            
-            //printf("Ok: N = %f, x = %f, n-m = %f, il fattoriale e' %f\n", N, vettoreX[p], nMenoX, fattorialeNMenoX);
-            vettoreNMenoXFattoriale[p] = fattorialeNMenoX;
-            fattorialeNMenoX = 1;
-        }
-        
-        // Calcola la probabilità di Poisson
-        for (i = 0; i < lunghezzaVettoreX; i++) {
-            float pPoisson = (fattorialeN * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
+            float pPoisson = (fattoriale(N) * pow(probabilita, vettoreX[i])) * pow(1 - probabilita, N - vettoreX[i]) /
             (vettoreXFattoriale[i] * vettoreNMenoXFattoriale[i]);
             if ((pPoisson >= 0 && pPoisson <= 31.25) || (pPoisson >= 31.25 && pPoisson <= 187.5) || (pPoisson >= 500 && pPoisson >= 812.5) || (pPoisson >= 968.75 && pPoisson <= 1000)) {
                 pPoisson = vettoreProbabilitaCompreseTraIntervallo[p];
@@ -293,7 +267,6 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
         if (p == 0) {
             puts("Non ho trovato alcun valore nel vettore delle frequenze di estrazione.");
         }
-        
         // L'utente ha scelto di visualizzare gli elmenti contenuti nel vettore delle frequenze di estrazione
         int i;
         for (i = 0; i < p; i++) {
