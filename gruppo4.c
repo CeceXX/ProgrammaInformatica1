@@ -74,6 +74,7 @@ void inserimentoNumeriCasuali(int array[], int lunghezza) {
     for (i = 0; i < lunghezza; i++) {
         array[i] = generaNumeroCasualeCompresoTraValori(200, 300);
     }
+    puts("Ho inserito i numeri casuali nel vettore.");
 }
 
 // 5. La visualizzazione di tutti i dati presenti nel vettore (Paolo Valeri)
