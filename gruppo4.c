@@ -284,7 +284,7 @@ void mostraMenu(int vettore[], int lunghezzaVettore) {
     puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
     puts("|  4  |  Inserimento di tutti i dati in maniera casuale con numeri compresi tra duecento e trecento   |");
     puts("|  5  |  Visualizzazione di tutti gli elementi presenti nel vettore                                   |");
-    puts("|  6  |  Inserimento dei numeri della serie geomtrica                                                 |");
+    puts("|  6  |  Inserimento dei numeri della serie geometrica                                                 |");
     puts("|  7  |  Prodotto dei numeri di indice primo                                                          |");
     puts("|  8  |  Somma dei resti della divisione per tre dei numeri pari                                      |");
     puts("|  9  |  Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella          |");
