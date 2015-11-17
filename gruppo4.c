@@ -38,6 +38,7 @@ void azzeramentoElementiVettore(int array[], int lunghezza) {
     for (i = 0; i < lunghezza; i++) {
         array[i] = 0;
     }
+    puts("Gli elementi del vettore sono stati azzerati.");
 }
 
 // 2. Inserimento di tutti i dati da tastiera (Elis Belletta)
