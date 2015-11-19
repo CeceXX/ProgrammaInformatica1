@@ -138,7 +138,6 @@ void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
 void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
     int somma = 0, i;
     for (i = 0; i < lunghezza; i++) {
-        
         // if (condizione) {...}
         // il codice all'interno dell'if viene eseguito solo se la (condizione) è VERA
         // altrimenti, se la condizione è FALSA, non viene eseguito
@@ -154,7 +153,7 @@ void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
 // 9. Ricerca di un elemento nel vettore attraverso la ricerca sequenziale con sentinella (Cesare de Cal)
 void ricercaLineareSentinella(int array[], int lunghezza) {
     int elementoDaCercare;
-    printf("Inserisci l'elemento da cercare: ");
+    printf("Inserisci l'elemento da cercare nel vettore: ");
     scanf("%d", &elementoDaCercare);
     
     array[lunghezza + 1] = elementoDaCercare;
