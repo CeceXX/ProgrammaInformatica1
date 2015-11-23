@@ -138,12 +138,7 @@ void prodottoNumeriIndicePrimo(int array[], int lunghezza) {
 void sommaRestoDivisioneNumeriPari(int array[], int lunghezza) {
     int somma = 0, i;
     for (i = 0; i < lunghezza; i++) {
-        // if (condizione) {...}
-        // il codice all'interno dell'if viene eseguito solo se la (condizione) è VERA
-        // altrimenti, se la condizione è FALSA, non viene eseguito
-        // if (1) {...} viene eseguito perchè se all'interno della condizione c'è un numero DIVERSO DA ZERO, allora la condizione è VERA
-        // if (0) {...} viene eseguito perchè se all'interno della condizione c'è ZERO, allora la condizione è FALSA
-        if (!(array[i] % 2)) { // il punto esclamatico significa "opposto di", se if (condizione) {...} è VERO, allora if (!(condizione)) è FALSO a causa del punto esclamativo, che INVERTE la condizione
+        if (array[i] % 2 == 0) {
             somma += array[i] % 3; // 'somma += 1'rr è lo stesso modo di dire 'somma = somma + 1'
         }
     }
