@@ -273,7 +273,7 @@ void probabilitaPoisson(int lunghezzaVettoreX, int opzioneSceltaUtente) {
 }
 
 void mostraMenu(int vettore[], int lunghezzaVettore) {
-    puts("-------------------------------------------------------------------------------------------------------");
+        åputs("-------------------------------------------------------------------------------------------------------");
     puts("|  1  |  Azzeramento del vettore                                                                      |");
     puts("|  2  |  Inserimento di tutti gli elementi da tastiera                                                |");
     puts("|  3  |  Inserimento di un solo dato nella prima posizione contente zero                              |");
