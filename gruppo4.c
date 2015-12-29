@@ -17,6 +17,7 @@
  13. (Probabilità di Poisson) Visualizza elementi vettore frequenze
  L'array verra dichiarato con una dimensione di 150 elementi, ma quando il programma parte, prima della visualizzazione del menu verra` richiesto di inserire il numero di elementi su cui operare.
  */
+ 
 #include <stdio.h>
 #include <stdlib.h> // serve per la 'macro' (è un po' come una funzione) che genera numeri random, RAND_MAX
 #include <math.h> // serve per la funzione 'pow()', usata per calcolare il risultato di una potenza data una base e un esponente: 'pow(base, esponente);'
