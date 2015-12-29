@@ -1,3 +1,3 @@
-# Welcome to our school project
+# Welcome to our C school project
 
-Purposely made it public to spread the love of programming with other classmates.
+We decided to make the project public to spread the love of programming with everyone.
